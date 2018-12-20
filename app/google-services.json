@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "639855229441",
+    "firebase_url": "https://testnotificationpush-6e366.firebaseio.com",
+    "project_id": "testnotificationpush-6e366",
+    "storage_bucket": "testnotificationpush-6e366.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639855229441:android:a7b3e56ac3e1e02c",
+        "android_client_info": {
+          "package_name": "com.example.uees2.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639855229441-ocfnthhc8s7o1tjlmh4k1f4t2r3354nd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh7ZBW9AyLaBNR3UIuQPtWPZFoDWM-SNI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
