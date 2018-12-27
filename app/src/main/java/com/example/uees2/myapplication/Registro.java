@@ -1,5 +1,6 @@
 package com.example.uees2.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,6 +23,7 @@ public class Registro extends AppCompatActivity {
     EditText editTextCedula, editTextNombres, editTextApellidos, editTextNombreContato, editTextCelularContacto;
     Spinner spinnerGenero,spinnerHabitacion;
     Button buttonRegistrar;
+    Button buttonPacientes;
 
     DatabaseReference databasePacientes;
 
@@ -41,6 +43,7 @@ public class Registro extends AppCompatActivity {
         spinnerGenero = findViewById(R.id.spinnerGenero);
         spinnerHabitacion = findViewById(R.id.spinnerHabitacion);
         buttonRegistrar = findViewById(R.id.buttonRegistrar);
+        buttonPacientes = findViewById(R.id.buttonPacientes);
 
 
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +51,13 @@ public class Registro extends AppCompatActivity {
             public void onClick(View v) {
 
                 RegistrarPaciente();
+            }
+        });
+        buttonPacientes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Registro.this, Pacientes.class);
+                startActivity(intent);
             }
         });
 
