@@ -29,15 +29,13 @@ public class PacienteLista extends ArrayAdapter<Paciente> {
 
         View listViewItem = inflater.inflate(R.layout.activity_lista_paciente, null, true);
 
-        TextView textViewNombre = (TextView) listViewItem.findViewById(R.id.textViewNombre);
+        TextView textViewNombres = (TextView) listViewItem.findViewById(R.id.textViewNombresCompletos);
         TextView textViewCedula = (TextView) listViewItem.findViewById(R.id.textViewCedula);
-        TextView textViewApellido = (TextView) listViewItem.findViewById(R.id.textViewApellido);
         TextView textViewHabitacion = (TextView) listViewItem.findViewById(R.id.textViewHabitacion);
         Paciente paciente = pacienteList.get(position);
         Log.d("myTag", String.valueOf(paciente.getHabitcion()));
         textViewCedula.setText(paciente.getCedula());
-        textViewNombre.setText(paciente.getNombres());
-        textViewApellido.setText(paciente.getApellidos());
+        textViewNombres.setText(paciente.getNombres()+" "+paciente.getApellidos());
         textViewHabitacion.setText(""+paciente.getHabitcion());
 
         return listViewItem;
