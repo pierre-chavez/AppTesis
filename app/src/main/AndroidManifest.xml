@@ -15,11 +15,12 @@
         <activity android:name=".Registro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListaPaciente" />
-        <activity android:name=".Pacientes"/>
+        <activity android:name=".Pacientes" />
+        <activity android:name=".Caidas" />
     </application>
 
 </manifest>

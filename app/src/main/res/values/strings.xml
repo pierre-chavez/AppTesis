@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="Habitación">Habitación: </string>
+    <string name="Habitacion">Habitación: </string>
     <string name="Nombres">Nombres: </string>
+    <string name="Numero_caida">Número de caída: </string>
+    <string name="Tipo_caida">Tipo de caída: </string>
+    <string name="FechaHora">Fecha Hora: </string>
+    <string name="Nombre">Nombre: </string>
+    <string name="Apellido">Apellido: </string>
+    <string name="Cedula">Cédula: </string>
+    <string name="Sexo">Sexo: </string>
+    <string name="Nombre_contacto">Nombre de contacto: </string>
+    <string name="Celular_contacto">Nombre de contacto: </string>
     <string name="textview">TextView</string>
 
     <array name="generos">

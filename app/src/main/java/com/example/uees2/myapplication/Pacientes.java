@@ -1,8 +1,11 @@
 package com.example.uees2.myapplication;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -18,6 +21,9 @@ import java.util.List;
 
 public class Pacientes extends AppCompatActivity {
 
+    public static final String CEDULA = "pacienteid";
+    public static final String NOMBRES = "pacientenombre";
+    public static final String HABITACION = "pacientehabitacion";
     DatabaseReference databasePacientes;
 
     ListView listViewPacientes;
@@ -28,8 +34,21 @@ public class Pacientes extends AppCompatActivity {
         setContentView(R.layout.activity_pacientes);
 
         databasePacientes = FirebaseDatabase.getInstance().getReference("Persona");
-        listViewPacientes = (ListView) findViewById(R.id.pacientes);
+        listViewPacientes = findViewById(R.id.pacientes);
         listaPacientes = new ArrayList<>();
+
+        listViewPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Paciente paciente = listaPacientes.get(position);
+                Intent intent = new Intent(getApplicationContext(), Caidas.class);
+
+                intent.putExtra(CEDULA, paciente.getCedula());
+                intent.putExtra(NOMBRES, paciente.getNombres()+" "+paciente.getApellidos());
+                intent.putExtra(HABITACION, ""+paciente.getHabitcion());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
