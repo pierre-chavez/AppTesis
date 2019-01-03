@@ -24,6 +24,7 @@ public class Registro extends AppCompatActivity {
     Spinner spinnerGenero,spinnerHabitacion;
     Button buttonRegistrar;
     Button buttonPacientes;
+    Button buttonEnlazador;
 
     DatabaseReference databasePacientes;
 
@@ -44,6 +45,7 @@ public class Registro extends AppCompatActivity {
         spinnerHabitacion = findViewById(R.id.spinnerHabitacion);
         buttonRegistrar = findViewById(R.id.buttonRegistrar);
         buttonPacientes = findViewById(R.id.buttonPacientes);
+        buttonEnlazador = findViewById(R.id.buttonEnlazador);
 
 
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +62,13 @@ public class Registro extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        buttonEnlazador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Registro.this, Enlazador.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
