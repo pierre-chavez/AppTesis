@@ -14,6 +14,31 @@
         android:layout_height="match_parent"
         tools:context=".Registro">
 
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Registro de Paciente"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Title"
+
+    />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9"
+            app:srcCompat="@drawable/usuario" />
+
         <EditText
             android:id="@+id/editTextApellidos"
             android:layout_width="0dp"
@@ -38,21 +63,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:ems="10"
             android:hint="Cedula"
-            android:inputType="textPersonName"
+            android:inputType="phone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <Spinner
             android:id="@+id/spinnerGenero"
             android:layout_width="0dp"
-            android:layout_height="33dp"
+            android:layout_height="35dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
@@ -103,10 +128,16 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="139dp"
             android:layout_marginLeft="139dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="157dp"
             android:layout_marginRight="157dp"
+            android:layout_marginBottom="8dp"
+            android:background="#00479B"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:text="Registrar Paciente"
+            android:textColor="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.387"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +163,7 @@
         <Spinner
             android:id="@+id/spinnerHabitacion"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
@@ -142,28 +173,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerGenero" />
-        <Button
-            android:id="@+id/buttonPacientes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="148dp"
-            android:layout_marginLeft="148dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="148dp"
-            android:layout_marginRight="148dp"
-            android:layout_marginBottom="5dp"
-            android:text="Pacientes"
-            app:layout_constraintBottom_toTopOf="@+id/buttonRegistrar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextCelularContacto" />
 
-        <Button
-            android:id="@+id/buttonEnlazador"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enlazador"
-            app:layout_constraintTop_toBottomOf="@+id/editTextCelularContacto" />
+
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>

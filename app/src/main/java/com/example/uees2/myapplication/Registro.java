@@ -23,8 +23,8 @@ public class Registro extends AppCompatActivity {
     EditText editTextCedula, editTextNombres, editTextApellidos, editTextNombreContato, editTextCelularContacto;
     Spinner spinnerGenero,spinnerHabitacion;
     Button buttonRegistrar;
-    Button buttonPacientes;
-    Button buttonEnlazador;
+    //Button buttonPacientes;
+    //Button buttonEnlazador;
 
     DatabaseReference databasePacientes;
 
@@ -44,8 +44,8 @@ public class Registro extends AppCompatActivity {
         spinnerGenero = findViewById(R.id.spinnerGenero);
         spinnerHabitacion = findViewById(R.id.spinnerHabitacion);
         buttonRegistrar = findViewById(R.id.buttonRegistrar);
-        buttonPacientes = findViewById(R.id.buttonPacientes);
-        buttonEnlazador = findViewById(R.id.buttonEnlazador);
+        //buttonPacientes = findViewById(R.id.buttonPacientes);
+        //buttonEnlazador = findViewById(R.id.buttonEnlazador);
 
 
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +55,7 @@ public class Registro extends AppCompatActivity {
                 RegistrarPaciente();
             }
         });
-        buttonPacientes.setOnClickListener(new View.OnClickListener() {
+        /*buttonPacientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Registro.this, Pacientes.class);
@@ -68,7 +68,7 @@ public class Registro extends AppCompatActivity {
                 Intent intent = new Intent(Registro.this, Enlazador.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
     }
 

@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
+    android:layout_marginLeft="16dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
-    android:layout_marginRight="8dp"
-    android:gravity="center"
+    android:layout_marginRight="16dp"
     android:layout_marginBottom="8dp"
+    android:gravity="center"
     android:orientation="vertical"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -18,37 +18,61 @@
     app:layout_constraintTop_toTopOf="parent"
     tools:context=".Enlazador">
 
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enlazar pulsera a Paciente"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Title"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/etiqueta" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Title"
-        android:text="@string/IdPulsera" />
+        android:text="@string/IdPulsera"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Title" />
 
     <Spinner
         android:id="@+id/spinnerPulseras"
+        android:layout_height="35dp"
         android:layout_width="match_parent"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
 
-        android:layout_height="wrap_content" />
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Subtitle" />
 
     <TextView
         android:id="@+id/textView7"
+        android:layout_marginTop="8dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Title"
-        android:text="@string/Paciente" />
+        android:text="@string/Paciente"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Title" />
 
     <Spinner
+
         android:id="@+id/spinnerPacientes"
         android:layout_width="match_parent"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
-        android:layout_height="wrap_content" />
+        android:layout_height="35dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Subtitle" />
 
     <Button
         android:id="@+id/buttonEnlazador"
+        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#5EBC79"
+        android:text="@string/Enlazar"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Title"
-        android:text="@string/Enlazar" />
+        android:textColor="#fff" />
 </LinearLayout>
