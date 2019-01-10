@@ -12,9 +12,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity" />
-        <activity android:name=".Registro">
-
-        </activity>
+        <activity android:name=".Registro"></activity>
         <activity android:name=".Pacientes" />
         <activity android:name=".Caidas" />
         <activity android:name=".Enlazador" />
@@ -25,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Informacion"></activity>
     </application>
 
 </manifest>

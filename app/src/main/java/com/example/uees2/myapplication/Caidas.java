@@ -114,8 +114,8 @@ public class Caidas extends AppCompatActivity {
         tipoCaida3.setValuesOnTopColor(Color.BLACK);
 
         // legend
-        tipoCaida1.setTitle("De espalda");
-        tipoCaida2.setTitle("De frente");
+        tipoCaida1.setTitle("De frente");
+        tipoCaida2.setTitle("De espalda");
         tipoCaida3.setTitle("De lado");
 
         graph.getViewport().setXAxisBoundsManual(true);
