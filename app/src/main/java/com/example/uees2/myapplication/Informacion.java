@@ -16,7 +16,7 @@ public class Informacion extends AppIntro {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_informacion);
 
-        addSlide(AppIntroFragment.newInstance("Paciente", "En esta opción se registra el paciente ingresando datos esenciales.",
+        addSlide(AppIntroFragment.newInstance("Paciente", "En esta opción la enfermera registra el paciente ingresando datos esenciales.",
                 R.drawable.enfermera, ContextCompat.getColor(getApplicationContext(), R.color.Intro1)));
         addSlide(AppIntroFragment.newInstance("Enlazar", "En esta opción se enlaza una pulsera con un paciente, por el identificador de la pulsera con el paciente por el número de cédula.",
                 R.drawable.pulsera, ContextCompat.getColor(getApplicationContext(), R.color.Intro2)));
