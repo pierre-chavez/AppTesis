@@ -101,7 +101,9 @@ public class DashboardFrag extends Fragment {
         buttonWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), Registro.class);
+                //String url = "http://pornhub.com";
+                //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                Intent intent = new Intent(v.getContext(), WifiActivity.class);
                 startActivity(intent);
             }
         });

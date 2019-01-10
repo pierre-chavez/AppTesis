@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.onesignal.OneSignal;
+
 public class Dashboard extends AppCompatActivity {
 
     FragmentManager fragmentManager;
@@ -21,6 +23,12 @@ public class Dashboard extends AppCompatActivity {
         DashboardFrag dashboardFrag = new DashboardFrag();
         fragmentTransaction.replace(R.id.container, dashboardFrag);
         fragmentTransaction.commit();
+
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
 
     }
 }

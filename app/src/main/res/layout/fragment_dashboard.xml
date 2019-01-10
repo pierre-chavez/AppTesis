@@ -60,6 +60,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Registro de pacientes"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -94,6 +95,7 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:text="Reportes de caidas de pacientes"/>
 
             <ImageView
@@ -145,7 +147,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pulsera"/>
+                android:text="Pulsera"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title"
+                />
 
             <Button
                 android:id="@+id/buttonEnlazar"
@@ -195,7 +199,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pulsera"/>
+                android:text="Conectar Pulsera"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title"
+                />
 
             <Button
                 android:id="@+id/buttonWifi"
@@ -203,10 +209,10 @@
                 android:layout_height="33dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="8dp"
-                android:background="#76F8FB"
+                android:background="#CD3A5A"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:text="Enlazar"
+                android:text="Conectar WIFI"
                 android:textColor="#fff" />
 
         </android.support.v7.widget.LinearLayoutCompat>
