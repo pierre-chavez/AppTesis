@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.onesignal.OneSignal;
+
 public class Dashboard extends AppCompatActivity {
 
     FragmentManager fragmentManager;

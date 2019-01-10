@@ -12,6 +12,7 @@
     <string name="Cedula">Cédula: </string>
     <string name="Sexo">Sexo: </string>
     <string name="Enlazar">Enlazar</string>
+    <string name="GraficoTiposCaidas">Gráfico de tipos caídas</string>
     <string name="Nombre_contacto">Nombre de contacto: </string>
     <string name="Celular_contacto">Nombre de contacto: </string>
     <string name="textview">TextView</string>
