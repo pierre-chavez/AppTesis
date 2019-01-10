@@ -29,7 +29,12 @@ public class DashboardFrag extends Fragment {
     Button buttonRegistrar;
     Button buttonEnlazar;
     Button buttonWifi;
+    Button buttonReporte;
     ImageView imageViewReporte;
+    ImageView imageViewWifi;
+    ImageView imageViewEnlazar;
+    ImageView imageViewRegistrar;
+    ImageView imageViewInformacion;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -79,13 +84,26 @@ public class DashboardFrag extends Fragment {
 
         buttonRegistrar = myFragmentView.findViewById(R.id.buttonRegistrar);
         buttonEnlazar = myFragmentView.findViewById(R.id.buttonEnlazar);
+        buttonReporte = myFragmentView.findViewById(R.id.buttonReporte);
         buttonWifi = myFragmentView.findViewById(R.id.buttonWifi);
         imageViewReporte = myFragmentView.findViewById(R.id.imageViewReporte);
+        imageViewInformacion = myFragmentView.findViewById(R.id.imageViewInformacion);
+        imageViewRegistrar = myFragmentView.findViewById(R.id.imageViewRegistrar);
+        imageViewEnlazar = myFragmentView.findViewById(R.id.imageViewEnlazar);
+        imageViewWifi = myFragmentView.findViewById(R.id.imageViewWifi);
 
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), Registro.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonReporte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Pacientes.class);
                 startActivity(intent);
             }
         });
@@ -112,6 +130,38 @@ public class DashboardFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), Pacientes.class);
+                startActivity(intent);
+            }
+        });
+
+        imageViewRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Registro.class);
+                startActivity(intent);
+            }
+        });
+
+
+        imageViewEnlazar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Enlazador.class);
+                startActivity(intent);
+            }
+        });
+
+        imageViewWifi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), WifiActivity.class);
+                startActivity(intent);
+            }
+        });
+        imageViewInformacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Informacion.class);
                 startActivity(intent);
             }
         });
