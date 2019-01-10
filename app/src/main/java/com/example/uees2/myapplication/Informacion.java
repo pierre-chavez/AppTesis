@@ -17,7 +17,7 @@ public class Informacion extends AppIntro {
         //setContentView(R.layout.activity_informacion);
 
         addSlide(AppIntroFragment.newInstance("Paciente", "En esta opción se registra el paciente ingresando datos esenciales.",
-                R.drawable.paciente, ContextCompat.getColor(getApplicationContext(), R.color.Intro1)));
+                R.drawable.enfermera, ContextCompat.getColor(getApplicationContext(), R.color.Intro1)));
         addSlide(AppIntroFragment.newInstance("Enlazar", "En esta opción se enlaza una pulsera con un paciente, por el identificador de la pulsera con el paciente por el número de cédula.",
                 R.drawable.pulsera, ContextCompat.getColor(getApplicationContext(), R.color.Intro2)));
         addSlide(AppIntroFragment.newInstance("Conectar", "En esta opción se configura las credenciales WiFi SSID (Nombre de la red WiFi) y su contraseña para que la pulserae se pueda conectar a la red.",
