@@ -26,11 +26,10 @@ public class Informacion extends AppIntro {
                 R.drawable.monitor, ContextCompat.getColor(getApplicationContext(), R.color.Intro4)));
 
         addSlide(AppIntroFragment.newInstance("Instrucciones para configurar pulsera:",
-                "1. Encender la pulsera." +
-                        "2. Conectarse a la red WiFi 'pulsera' contraseña '12345678'." +
-                        "3. En la aplicación elegir la opción conectar." +
-                        "4. Ingresar las credenciales de la red WiFi con acceso a Internet." +
-                        "5. En la aplicación elegir la opción y enlazar la pulsera con un paciente registrado previamente.",
+                "1. Encender la pulsera y conectarse a la red WiFi 'pulsera' contraseña '12345678'.\n" +
+                        "2. En la aplicación elegir la opción conectar.\n" +
+                        "3. Ingresar las credenciales de la red WiFi con acceso a Internet.\n" +
+                        "4. En la aplicación elegir la opción enlazar para relacionar la pulsera con un paciente registrado previamente.",
                 R.drawable.instrucciones, ContextCompat.getColor(getApplicationContext(), R.color.Intro4)));
     }
 
