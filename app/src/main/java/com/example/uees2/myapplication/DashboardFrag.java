@@ -85,7 +85,7 @@ public class DashboardFrag extends Fragment {
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), Informacion.class);
+                Intent intent = new Intent(v.getContext(), Registro.class);
                 startActivity(intent);
             }
         });
