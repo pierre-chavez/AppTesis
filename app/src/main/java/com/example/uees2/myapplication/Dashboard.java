@@ -29,5 +29,11 @@ public class Dashboard extends AppCompatActivity {
         fragmentTransaction.replace(R.id.container, dashboardFrag);
         fragmentTransaction.commit();
 
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
     }
 }
