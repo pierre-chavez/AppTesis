@@ -1,5 +1,6 @@
 package com.example.uees2.myapplication;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -29,11 +30,7 @@ public class Dashboard extends AppCompatActivity {
         fragmentTransaction.replace(R.id.container, dashboardFrag);
         fragmentTransaction.commit();
 
-        // OneSignal Initialization
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init();
-
+        Intent intent = new Intent(this, Informacion.class);
+        startActivity(intent);
     }
 }
