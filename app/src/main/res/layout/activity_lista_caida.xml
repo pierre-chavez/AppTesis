@@ -3,8 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:context=".CaidaLista">
+    android:orientation="horizontal"
+    tools:context=".CaidaLista"
+    android:layout_marginTop="4dp">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/caida"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -63,6 +81,8 @@
             android:textColor="@color/black"
             android:text="@string/textview"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Subtitle" />
+
+    </LinearLayout>
 
     </LinearLayout>
 

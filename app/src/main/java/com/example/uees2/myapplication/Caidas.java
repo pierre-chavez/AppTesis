@@ -65,7 +65,7 @@ public class Caidas extends AppCompatActivity {
         String cedula = intent.getStringExtra(Pacientes.CEDULA);
         String nombres = intent.getStringExtra(Pacientes.NOMBRES);
         String habitacion = intent.getStringExtra(Pacientes.HABITACION);
-        textViewCedula.setText(cedula);
+        //textViewCedula.setText(cedula);
         textViewNombres.setText(nombres);
         textViewHabitacion.setText(""+habitacion);
         databaseCaidas = FirebaseDatabase.getInstance().getReference("Caida").child(cedula);
