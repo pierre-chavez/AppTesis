@@ -3,6 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.uees2.myapplication">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <meta-data
+        android:name="com.onesignal.NotificationAccentColor.DEFAULT"
+        android:value="ff0000" />
+    <meta-data
+        android:name="com.onesignal.NotificationOpened.DEFAULT"
+        android:value="DISABLE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,6 +33,15 @@
         </activity>
         <activity android:name=".Informacion"></activity>
         <activity android:name=".WifiActivity"></activity>
+
+        <service
+            android:name=".NotificationExtenderBareBones"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.onesignal.NotificationExtender" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

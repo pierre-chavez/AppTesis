@@ -13,7 +13,7 @@ import com.onesignal.OneSignal;
 
 
 public class Dashboard extends AppCompatActivity {
-
+    private static Context mContext;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     public static final String TAG = "Version";
@@ -25,8 +25,11 @@ public class Dashboard extends AppCompatActivity {
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
+                .setNotificationOpenedHandler(new NotificationOpenedHandler())
                 .init();
-        
+        OneSignal.enableVibrate(true);
+        OneSignal.enableSound(true);
+
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -34,7 +37,6 @@ public class Dashboard extends AppCompatActivity {
         DashboardFrag dashboardFrag = new DashboardFrag();
         fragmentTransaction.replace(R.id.container, dashboardFrag);
         fragmentTransaction.commit();
-
 
         switch (getFirstTimeRun(this)) {
             case 0:
@@ -52,10 +54,15 @@ public class Dashboard extends AppCompatActivity {
                 //
                 break;
         }
-
-
     }
 
+    public static Context getContext() {
+        return mContext;
+    }
+
+    public static void setContext(Context mContext) {
+        Dashboard.mContext = mContext;
+    }
     //Retorna: 0 primera vez / 1 no es primera vez / 2 nueva versión
     public static int getFirstTimeRun(Context contexto) {
         SharedPreferences sp = contexto.getSharedPreferences("MYAPP", 0);
