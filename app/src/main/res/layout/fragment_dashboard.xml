@@ -116,9 +116,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:text="Reportes de caídas de pacientes"
                 android:textAlignment="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title"
-                android:text="Reportes de caidas de pacientes"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />
 
             <Button
                 android:id="@+id/buttonReporte"
