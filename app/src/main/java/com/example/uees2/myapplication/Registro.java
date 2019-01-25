@@ -125,7 +125,7 @@ public class Registro extends AppCompatActivity {
         Paciente paciente = new Paciente(cedula,nombres,apellidos,strDate,genero,nHabitacion,nombreContacto,celularContacto);
 
         databasePacientes.child(id).setValue(paciente);
-
+        finish();
         Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
 
 
