@@ -27,6 +27,7 @@ public class DashboardFrag extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     Button buttonRegistrar;
+    Button buttonEditar;
     Button buttonEnlazar;
     Button buttonWifi;
     Button buttonReporte;
@@ -83,6 +84,7 @@ public class DashboardFrag extends Fragment {
 
 
         buttonRegistrar = myFragmentView.findViewById(R.id.buttonRegistrar);
+        buttonEditar = myFragmentView.findViewById(R.id.buttonEditar);
         buttonEnlazar = myFragmentView.findViewById(R.id.buttonEnlazar);
         buttonReporte = myFragmentView.findViewById(R.id.buttonReporte);
         buttonWifi = myFragmentView.findViewById(R.id.buttonWifi);
@@ -96,6 +98,14 @@ public class DashboardFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), Registro.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), EditarPaciente.class);
                 startActivity(intent);
             }
         });
