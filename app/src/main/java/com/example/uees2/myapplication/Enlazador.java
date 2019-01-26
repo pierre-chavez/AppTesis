@@ -119,7 +119,7 @@ public class Enlazador extends AppCompatActivity {
         PacientePulsera pacientePulsera = new PacientePulsera(idPulsera, cedula, 0);
 
         databasePulseras.child(idPulsera).setValue(pacientePulsera);
-
+        finish();
         Toast.makeText(this, "Enlace exitoso", Toast.LENGTH_SHORT).show();
 
 
