@@ -123,7 +123,7 @@ public class Caidas extends AppCompatActivity {
         graph.getViewport().setMaxX(5);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
-        graph.getViewport().setMaxY(10);
+        graph.getViewport().setMaxY(cantidadCaida + 1);
 
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
@@ -211,6 +211,8 @@ public class Caidas extends AppCompatActivity {
                     }
                     listaCaidas.add(caida);
                 }
+                cantidadCaida = Math.max(caidaTipo1, caidaTipo2);
+                cantidadCaida = Math.max(cantidadCaida, caidaTipo3);
                 HashSet<Date> listToSet = new HashSet<Date>(listaFechaCaidas);
                 listaFechaCaidas = new ArrayList<Date>(listToSet);
 
@@ -222,21 +224,17 @@ public class Caidas extends AppCompatActivity {
                         if (listaFechaCaidas.get(x).equals(listaFechaCaidas.get(y)))
                             repe += 1;
                     }
-
                     if (repe > 0) {
                         repetidos.add(k, listaFechaCaidas.get(x));
                         listaCantidadCaidas.add(k, repe + 1);
                         k++;
-                    }/*else{
-                        listaCantidadCaidas.add(k,repe);
-                    }*/
+                    }
                     repe = 0;
                 }
                 ArrayAdapter adapter = new CaidaLista(Caidas.this, listaCaidas);
                 listViewCaidas.setAdapter(adapter);
 
                 initGraphTipoCaida(graphCaida);
-                //initGraphFecha(graphFecha);
             }
 
 
