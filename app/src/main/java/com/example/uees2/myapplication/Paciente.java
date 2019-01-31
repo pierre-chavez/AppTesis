@@ -1,8 +1,9 @@
 package com.example.uees2.myapplication;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Paciente {
+public class Paciente implements Serializable {
 
     String cedula;
     String nombres;

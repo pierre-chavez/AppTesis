@@ -18,7 +18,7 @@ public class Informacion extends AppIntro {
 
         addSlide(AppIntroFragment.newInstance("Paciente", "En esta opción la enfermera registra el paciente ingresando datos esenciales.",
                 R.drawable.enfermera, ContextCompat.getColor(getApplicationContext(), R.color.Intro1)));
-        addSlide(AppIntroFragment.newInstance("Enlazar", "En esta opción se enlaza una pulsera con un paciente, por el identificador de la pulsera con el paciente por el número de cédula.",
+        addSlide(AppIntroFragment.newInstance("Enlazar", "En esta opción se enlazar una pulsera con un paciente, por el identificador de la pulsera con el paciente por el número de cédula.",
                 R.drawable.pulsera, ContextCompat.getColor(getApplicationContext(), R.color.Intro2)));
         addSlide(AppIntroFragment.newInstance("Conectar", "En esta opción se configura las credenciales WiFi SSID (Nombre de la red WiFi) y su contraseña para que la pulsera se pueda conectar a la red.",
                 R.drawable.wifi, ContextCompat.getColor(getApplicationContext(), R.color.Intro3)));
