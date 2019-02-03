@@ -22,7 +22,7 @@ public class EdicionPaciente extends AppCompatActivity {
     Spinner spinnerGenero,spinnerHabitacion;
     Button buttonActualizar;
 
-
+    DatabaseReference databasePacientes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class EdicionPaciente extends AppCompatActivity {
         setContentView(R.layout.activity_edicion_paciente);
 
         paciente = (Paciente) getIntent().getSerializableExtra(EditarPaciente.PACIENTE);
+        databasePacientes = FirebaseDatabase.getInstance().getReference("Persona");
 
 
         editTextCedula = findViewById(R.id.editTextCedula);
@@ -92,7 +93,7 @@ public class EdicionPaciente extends AppCompatActivity {
                     return;
                 }
 
-                ActualizarPaciente(paciente.getCedula(),cedula, nombres, apellidos, fecha,genero,Integer.parseInt(habitacion),nombreContacto,celularContacto);
+                ActualizarPaciente(cedula, nombres, apellidos, fecha,genero,Integer.parseInt(habitacion),nombreContacto,celularContacto);
 
             }
         });
@@ -111,17 +112,22 @@ public class EdicionPaciente extends AppCompatActivity {
     }
 
 
-    private boolean ActualizarPaciente(String id,String cedula, String nombres,String apellidos, String fechaRegistro,String genero, int habitacion, String nombreContacto, String celular){
+    private boolean ActualizarPaciente(String cedula, String nombres,String apellidos, String fechaRegistro,String genero, int habitacion, String nombreContacto, String celular){
 
-        DatabaseReference databasePacientes = FirebaseDatabase.getInstance().getReference("Persona").child(id);
 
+        String id= cedula;
         Paciente paciente = new Paciente(cedula, nombres, apellidos, fechaRegistro, genero,habitacion, nombreContacto,celular );
 
-        databasePacientes.setValue(paciente);
 
+        databasePacientes.child(id).setValue(paciente);
+        finish();
         Toast.makeText(this, "Paciente actualizado", Toast.LENGTH_LONG).show();
 
+
+
         return true;
+
+
 
     }
 }
