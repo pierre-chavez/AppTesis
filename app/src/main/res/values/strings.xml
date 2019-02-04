@@ -38,4 +38,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="correo_electr_nico">Correo electrónico</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="ya_tienes_una_cuenta_inicia_sesi_n">¿Ya tienes una cuenta? Inicia sesión</string>
+    <string name="no_tienes_una_cuenta_inicia_sesi_n">¿No tienes una cuenta? Registrate</string>
 </resources>

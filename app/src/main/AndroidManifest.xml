@@ -25,7 +25,7 @@
         <activity android:name=".Pacientes" />
         <activity android:name=".Caidas" />
         <activity android:name=".Enlazador" />
-        <activity android:name=".Dashboard">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,7 +45,10 @@
         </service>
 
         <activity android:name=".EditarPaciente" />
-        <activity android:name=".EdicionPaciente"></activity>
+        <activity android:name=".EdicionPaciente" />
+        <activity android:name=".Dashboard" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
