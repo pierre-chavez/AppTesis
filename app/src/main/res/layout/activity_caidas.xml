@@ -21,7 +21,7 @@
             android:id="@+id/textViewCedula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Listado de Caidas"
+            android:text="Listado de Caídas"
             android:gravity="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title"
             app:layout_constraintStart_toStartOf="parent"

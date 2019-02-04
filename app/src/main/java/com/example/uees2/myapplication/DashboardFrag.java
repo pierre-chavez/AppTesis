@@ -113,7 +113,7 @@ public class DashboardFrag extends Fragment {
         buttonReporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), Pacientes.class);
+                Intent intent = new Intent(v.getContext(), ReportePacientesActivity.class);
                 startActivity(intent);
             }
         });
@@ -139,7 +139,7 @@ public class DashboardFrag extends Fragment {
         imageViewReporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), Pacientes.class);
+                Intent intent = new Intent(v.getContext(), ReportePacientesActivity.class);
                 startActivity(intent);
             }
         });

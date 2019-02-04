@@ -48,7 +48,10 @@
         <activity android:name=".EdicionPaciente" />
         <activity android:name=".Dashboard" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".CaidasHistoricoActivity" />
+        <activity android:name=".CaidasGraficoActivity" />
+        <activity android:name=".ReportePacientesActivity"></activity>
     </application>
 
 </manifest>
