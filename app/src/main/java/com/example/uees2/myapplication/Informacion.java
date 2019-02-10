@@ -16,9 +16,9 @@ public class Informacion extends AppIntro {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_informacion);
 
-        addSlide(AppIntroFragment.newInstance("Paciente", "En esta opción la enfermera registra el paciente ingresando datos esenciales.",
+        addSlide(AppIntroFragment.newInstance("Paciente", "En esta opción se registra el paciente ingresando datos esenciales.",
                 R.drawable.enfermera, ContextCompat.getColor(getApplicationContext(), R.color.Intro1)));
-        addSlide(AppIntroFragment.newInstance("Enlazar", "En esta opción se enlazar una pulsera con un paciente, por el identificador de la pulsera con el paciente por el número de cédula.",
+        addSlide(AppIntroFragment.newInstance("Enlazar", "En esta opción se enlaza una pulsera con un paciente.",
                 R.drawable.pulsera, ContextCompat.getColor(getApplicationContext(), R.color.Intro2)));
         addSlide(AppIntroFragment.newInstance("Conectar", "En esta opción se configura las credenciales WiFi SSID (Nombre de la red WiFi) y su contraseña para que la pulsera se pueda conectar a la red.",
                 R.drawable.wifi, ContextCompat.getColor(getApplicationContext(), R.color.Intro3)));
@@ -26,10 +26,10 @@ public class Informacion extends AppIntro {
                 R.drawable.monitor, ContextCompat.getColor(getApplicationContext(), R.color.Intro4)));
 
         addSlide(AppIntroFragment.newInstance("Instrucciones para configurar pulsera:",
-                "1. Encender la pulsera y conectarse a la red WiFi 'pulsera' contraseña '12345678'.\n" +
+                "1. Encender la pulsera y conectarse a la red WiFi 'PULSERA' contraseña '12345678'.\n" +
                         "2. En la aplicación elegir la opción conectar.\n" +
-                        "3. Ingresar las credenciales de la red WiFi con acceso a Internet.\n" +
-                        "4. En la aplicación elegir la opción enlazar para relacionar la pulsera con un paciente registrado previamente.",
+                        "3. Ingresar las credenciales de la red WiFi.\n" +
+                        "4. En la aplicación elegir la opción enlazar para relacionar la pulsera con el paciente.",
                 R.drawable.instrucciones, ContextCompat.getColor(getApplicationContext(), R.color.Intro5)));
     }
 

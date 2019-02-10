@@ -18,6 +18,9 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SignUpActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
@@ -91,6 +94,11 @@ public class SignUpActivity extends AppCompatActivity {
             editTextPassword.requestFocus();
             return;
         }
+        if (!isValidPassword(password.trim())) {
+            editTextPassword.setError("La contraseña debe tener al menos una letra mayúscula, una letra minúscula y un número");
+            editTextPassword.requestFocus();
+            return;
+        }
 
         progressBar.setVisibility(View.VISIBLE);
 
@@ -127,4 +135,17 @@ public class SignUpActivity extends AppCompatActivity {
         finish();
     }
 
+    public boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$)\\S{6,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }
 }
