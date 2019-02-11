@@ -4,14 +4,24 @@ public class Usuario {
     private String email;
     private String password;
     private int rol;
+    private String playerId;
 
     public Usuario() {
     }
 
-    public Usuario(String email, String password, int rol) {
+    public Usuario(String email, String password, int rol, String playerId) {
         this.email = email;
         this.password = password;
         this.rol = rol;
+        this.playerId = playerId;
+    }
+
+    public String getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(String playerId) {
+        this.playerId = playerId;
     }
 
     public String getEmail() {

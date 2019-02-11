@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.onesignal.OSPermissionSubscriptionState;
+import com.onesignal.OSSubscriptionState;
 import com.onesignal.OneSignal;
 
 
@@ -18,6 +20,7 @@ public class Dashboard extends AppCompatActivity {
     private static Context mContext;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    String playerId = "";
     public static final String TAG = "Version";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,16 @@ public class Dashboard extends AppCompatActivity {
                 .init();
         OneSignal.enableVibrate(true);
         OneSignal.enableSound(true);
+        OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+            @Override
+            public void idsAvailable(String userId, String registrationId) {
+                Log.d("Dashboard", "User:" + userId);
+                playerId = userId;
+                if (registrationId != null)
+                    Log.d("Dashboard", "registrationId:" + registrationId);
 
+            }
+        });
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 

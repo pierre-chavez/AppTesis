@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.onesignal.OneSignal;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
     EditText editTextEmail, editTextPassword;
-
+    String playerId = "";
     private FirebaseAuth mAuth;
 
     DatabaseReference databaseUsuario;
@@ -45,7 +47,23 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         databaseUsuario = FirebaseDatabase.getInstance().getReference("Usuario");
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .setNotificationOpenedHandler(new NotificationOpenedHandler())
+                .init();
+        OneSignal.enableVibrate(true);
+        OneSignal.enableSound(true);
+        OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+            @Override
+            public void idsAvailable(String userId, String registrationId) {
+                Log.d("SignUp", "User:" + userId);
+                playerId = userId;
+                if (registrationId != null)
+                    Log.d("SignUp", "registrationId:" + registrationId);
 
+            }
+        });
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
@@ -111,8 +129,8 @@ public class SignUpActivity extends AppCompatActivity {
                     String correo = editTextEmail.getText().toString().trim();
                     String contrasenia = editTextPassword.getText().toString().trim();
 
-                    registrarUsuario(correo, contrasenia, 1);
-                    startActivity(new Intent(SignUpActivity.this, ProfileActivity.class));
+                    registrarUsuario(correo, contrasenia, 1, playerId);
+                    startActivity(new Intent(SignUpActivity.this, Dashboard.class));
                 } else {
 
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
@@ -128,8 +146,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    private void registrarUsuario(String email, String password, int rol) {
-        Usuario usuario = new Usuario(email, password, rol);
+    private void registrarUsuario(String email, String password, int rol, String playerId) {
+        Usuario usuario = new Usuario(email, password, rol, playerId);
         String id = databaseUsuario.push().getKey();
         databaseUsuario.child(id).setValue(usuario);
         finish();

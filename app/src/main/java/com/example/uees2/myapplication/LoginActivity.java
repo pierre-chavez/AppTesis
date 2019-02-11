@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -14,12 +15,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.onesignal.OneSignal;
 
 public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     EditText editTextEmail, editTextPassword;
     ProgressBar progressBar;
+    public String playerId = "";
+    DatabaseReference databaseUsuario;
 
     public LoginActivity() {
     }
@@ -40,6 +50,25 @@ public class LoginActivity extends AppCompatActivity {
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        databaseUsuario = FirebaseDatabase.getInstance().getReference("Usuario");
+
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .setNotificationOpenedHandler(new NotificationOpenedHandler())
+                .init();
+        OneSignal.enableVibrate(true);
+        OneSignal.enableSound(true);
+        OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+            @Override
+            public void idsAvailable(String userId, String registrationId) {
+                Log.d("LogIn", "User:" + userId);
+                playerId = userId;
+                if (registrationId != null)
+                    Log.d("LogIn", "registrationId:" + registrationId);
+
+            }
+        });
 
         findViewById(R.id.textViewSignup).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void userLogin() {
-        String email = editTextEmail.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
         if (email.isEmpty()) {
@@ -85,12 +114,14 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         progressBar.setVisibility(View.VISIBLE);
-
+        Log.d("PlayerId", playerId);
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
+                    Log.d("PlayerId", playerId);
+                    actualizarUsuario(email, playerId);
                     finish();
                     Intent intent = new Intent(LoginActivity.this, Dashboard.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -110,6 +141,32 @@ public class LoginActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(this, Dashboard.class));
         }
+    }
+
+    public void actualizarUsuario(final String correo, final String playerId2) {
+        Log.d("Correo", correo);
+        Log.d("playerId2", playerId2);
+        databaseUsuario.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot usuariosSnapshot : dataSnapshot.getChildren()) {
+                    Usuario usuario = usuariosSnapshot.getValue(Usuario.class);
+                    Log.d("Usuario", usuario.getEmail());
+                    Log.d("Correo", correo);
+                    if (usuario.getEmail().equals(correo)) {
+                        usuario.setPlayerId(playerId2);
+                        String id = usuariosSnapshot.getKey();
+                        Log.d("id", correo);
+                        databaseUsuario.child(id).setValue(usuario);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }
