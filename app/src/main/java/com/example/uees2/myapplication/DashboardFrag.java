@@ -36,6 +36,7 @@ public class DashboardFrag extends Fragment {
     ImageView imageViewEnlazar;
     ImageView imageViewRegistrar;
     ImageView imageViewInformacion;
+    ImageView imageViewPerfil;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -93,6 +94,7 @@ public class DashboardFrag extends Fragment {
         imageViewRegistrar = myFragmentView.findViewById(R.id.imageViewRegistrar);
         imageViewEnlazar = myFragmentView.findViewById(R.id.imageViewEnlazar);
         imageViewWifi = myFragmentView.findViewById(R.id.imageViewWifi);
+        imageViewPerfil = myFragmentView.findViewById(R.id.imageViewPerfil);
 
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,6 +174,14 @@ public class DashboardFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), Informacion.class);
+                startActivity(intent);
+            }
+        });
+
+        imageViewPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ProfileActivity.class);
                 startActivity(intent);
             }
         });

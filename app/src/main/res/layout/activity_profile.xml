@@ -65,5 +65,14 @@
         android:text="Guardar"
         android:textAllCaps="false" />
 
+    <TextView
+        android:id="@+id/textCerrarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Cerrar Sesión"
+        android:textAlignment="center"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
 
 </LinearLayout>

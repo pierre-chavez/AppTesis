@@ -27,6 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView textView;
     ImageView imageView;
     EditText editText;
+    TextView textViewCerrarSesion;
 
     Uri uriProfileImage;
     ProgressBar progressBar;
@@ -61,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         textView = (TextView) findViewById(R.id.textViewVerified);
+        textViewCerrarSesion = findViewById(R.id.textCerrarSesion);
 
 
         loadUserInformation();
@@ -72,6 +74,15 @@ public class ProfileActivity extends AppCompatActivity {
                 finish();
                 startActivity(new Intent(view.getContext(), Dashboard.class));
             }
+        });
+
+
+        textViewCerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    //
+                    //
+                }
         });
     }
 
