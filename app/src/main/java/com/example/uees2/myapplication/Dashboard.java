@@ -21,6 +21,10 @@ public class Dashboard extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     String playerId = "";
+
+    FirebaseAuth mAuth;
+
+
     public static final String TAG = "Version";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,9 @@ public class Dashboard extends AppCompatActivity {
         DashboardFrag dashboardFrag = new DashboardFrag();
         fragmentTransaction.replace(R.id.container, dashboardFrag);
         fragmentTransaction.commit();
+
+        mAuth = FirebaseAuth.getInstance();
+
 
         switch (getFirstTimeRun(this)) {
             case 0:
@@ -89,4 +96,14 @@ public class Dashboard extends AppCompatActivity {
         return result;
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (mAuth.getCurrentUser() == null){
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
 }

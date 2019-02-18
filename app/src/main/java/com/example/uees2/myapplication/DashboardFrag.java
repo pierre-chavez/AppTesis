@@ -4,12 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -37,6 +45,14 @@ public class DashboardFrag extends Fragment {
     ImageView imageViewRegistrar;
     ImageView imageViewInformacion;
     ImageView imageViewPerfil;
+    ImageView imageViewUsuarios;
+
+    FirebaseAuth mAuth;
+    Usuario usuario;
+
+    DatabaseReference databaseUsuarios;
+
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -74,7 +90,39 @@ public class DashboardFrag extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        mAuth = FirebaseAuth.getInstance();
 
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+
+        databaseUsuarios = FirebaseDatabase.getInstance().getReference("Usuario").child(mAuth.getUid());
+
+        databaseUsuarios.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                usuario = dataSnapshot.getValue(Usuario.class);
+
+
+                if(usuario.getRol().equals("Admin")){
+                    imageViewUsuarios.setVisibility(View.VISIBLE);
+                }else{
+                    imageViewUsuarios.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -82,6 +130,7 @@ public class DashboardFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View myFragmentView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
 
 
         buttonRegistrar = myFragmentView.findViewById(R.id.buttonRegistrar);
@@ -95,6 +144,7 @@ public class DashboardFrag extends Fragment {
         imageViewEnlazar = myFragmentView.findViewById(R.id.imageViewEnlazar);
         imageViewWifi = myFragmentView.findViewById(R.id.imageViewWifi);
         imageViewPerfil = myFragmentView.findViewById(R.id.imageViewPerfil);
+        imageViewUsuarios = myFragmentView.findViewById(R.id.imageViewUsuarios);
 
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,6 +232,14 @@ public class DashboardFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        imageViewUsuarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ListarUsuariosActivity.class);
                 startActivity(intent);
             }
         });

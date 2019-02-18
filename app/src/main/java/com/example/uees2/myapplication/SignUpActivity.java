@@ -128,8 +128,8 @@ public class SignUpActivity extends AppCompatActivity {
                     finish();
                     String correo = editTextEmail.getText().toString().trim();
                     String contrasenia = editTextPassword.getText().toString().trim();
-
-                    registrarUsuario(correo, contrasenia, 1, playerId);
+                    String userId = mAuth.getUid();
+                    registrarUsuario(userId,correo, contrasenia, "Familiar", playerId);
                     startActivity(new Intent(SignUpActivity.this, Dashboard.class));
                 } else {
 
@@ -146,9 +146,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    private void registrarUsuario(String email, String password, int rol, String playerId) {
-        Usuario usuario = new Usuario(email, password, rol, playerId);
-        String id = databaseUsuario.push().getKey();
+    private void registrarUsuario(String userdId,String email, String password, String rol, String playerId) {
+        Usuario usuario = new Usuario(userdId, email, password, rol, playerId);
+        //String id = databaseUsuario.push().getKey();
+        String id = userdId;
         databaseUsuario.child(id).setValue(usuario);
         finish();
     }
