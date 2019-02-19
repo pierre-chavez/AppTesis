@@ -32,9 +32,15 @@ public class NotificationOpenedHandler implements OneSignal.NotificationOpenedHa
                 Log.i("OneSignal", "Llamando... " + numeroContacto);
                 Context c = Dashboard.getContext();
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setData(Uri.parse("tel:" + numeroContacto));
-                c.startActivity(intent);
+                Log.e("intent", "" + intent.toString());
+                Log.e("context", "" + c.toString());
+                if (intent != null) {
+                    // c.startActivity(intent);
+                } else {
+                    Log.e("llamada", "Can't resolve app for ACTION_DIAL Intent.");
+                }
             } else if (result.action.actionID.equals("2")) {
                 Context c = Dashboard.getContext();
                 Intent intent = new Intent(c, Dashboard.class);
@@ -44,4 +50,5 @@ public class NotificationOpenedHandler implements OneSignal.NotificationOpenedHa
         }
 
     }
+
 }
