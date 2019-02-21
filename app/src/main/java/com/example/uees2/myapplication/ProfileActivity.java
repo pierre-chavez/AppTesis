@@ -20,6 +20,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
     private static final int CHOOSE_IMAGE = 101;
@@ -29,12 +34,14 @@ public class ProfileActivity extends AppCompatActivity {
     EditText editText;
     TextView textViewCerrarSesion;
 
+    FirebaseAuth mAuth;
+    Usuario usuario;
+    DatabaseReference databaseUsuarios;
+
     Uri uriProfileImage;
     ProgressBar progressBar;
 
     String profileImageUrl;
-
-    FirebaseAuth mAuth;
 
     public ProfileActivity() {
     }
@@ -63,8 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         textView = (TextView) findViewById(R.id.textViewVerified);
         textViewCerrarSesion = findViewById(R.id.textCerrarSesion);
-
-
+        editText.setText(Dashboard.EMAIL);
         loadUserInformation();
 
         findViewById(R.id.buttonSave).setOnClickListener(new View.OnClickListener() {
@@ -75,25 +81,41 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(new Intent(view.getContext(), Dashboard.class));
             }
         });
-
-
-        textViewCerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    //
-                    //
-                }
-        });
+        mAuth = FirebaseAuth.getInstance();
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
+        mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() == null) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
+        } else {
+
+            databaseUsuarios = FirebaseDatabase.getInstance().getReference("Usuario").child(mAuth.getUid());
+
+            databaseUsuarios.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    usuario = dataSnapshot.getValue(Usuario.class);
+                    editText.setText(usuario.getEmail());
+                    // cambiarDasboard(usuario);
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
         }
+
+
     }
 
     private void loadUserInformation() {

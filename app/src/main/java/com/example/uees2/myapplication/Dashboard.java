@@ -24,6 +24,7 @@ import com.onesignal.OneSignal;
 
 
 public class Dashboard extends AppCompatActivity {
+    public static String EMAIL;
     private static Context mContext;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
@@ -38,6 +39,11 @@ public class Dashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
         setContentView(R.layout.activity_dashboard);
         // OneSignal Initialization
         OneSignal.startInit(this)
@@ -63,10 +69,6 @@ public class Dashboard extends AppCompatActivity {
         DashboardFrag dashboardFrag = new DashboardFrag();
         fragmentTransaction.add(R.id.container, dashboardFrag);
         fragmentTransaction.commit();
-
-
-
-        mAuth = FirebaseAuth.getInstance();
 
 
         switch (getFirstTimeRun(this)) {
@@ -106,25 +108,66 @@ public class Dashboard extends AppCompatActivity {
         return result;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
+        if (mAuth.getCurrentUser() == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
+        if (mAuth.getUid() == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
+        if (mAuth.getUid() != null) {
+            databaseUsuarios = FirebaseDatabase.getInstance().getReference("Usuario").child(mAuth.getUid());
+            databaseUsuarios.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    usuario = dataSnapshot.getValue(Usuario.class);
+                    EMAIL = usuario.getEmail();
+                    // cambiarDasboard(usuario);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
-
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
         if (mAuth.getCurrentUser() == null){
             finish();
             startActivity(new Intent(this, LoginActivity.class));
+            return;
         }
 
-
-
         databaseUsuarios = FirebaseDatabase.getInstance().getReference("Usuario").child(mAuth.getUid());
-
         databaseUsuarios.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 usuario = dataSnapshot.getValue(Usuario.class);
+                EMAIL = usuario.getEmail();
                // cambiarDasboard(usuario);
 
 
@@ -135,8 +178,6 @@ public class Dashboard extends AppCompatActivity {
 
             }
         });
-
-
     }
 
 

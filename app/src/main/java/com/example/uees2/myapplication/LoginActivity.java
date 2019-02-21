@@ -125,6 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                     Intent intent = new Intent(LoginActivity.this, Dashboard.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Dashboard.EMAIL = email;
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();

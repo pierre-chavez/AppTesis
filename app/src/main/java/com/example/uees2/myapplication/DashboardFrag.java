@@ -96,9 +96,35 @@ public class DashboardFrag extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth == null) {
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            return;
+        }
+        if (mAuth.getCurrentUser() == null) {
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            return;
+        }
+        if (mAuth.getUid() == null) {
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            return;
+        }
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
-
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth == null) {
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            return;
+        }
+        if (mAuth.getCurrentUser() == null) {
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            return;
+        }
 
 
         databaseUsuarios = FirebaseDatabase.getInstance().getReference("Usuario").child(mAuth.getUid());
