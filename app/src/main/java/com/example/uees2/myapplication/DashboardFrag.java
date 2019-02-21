@@ -243,8 +243,10 @@ public class DashboardFrag extends Fragment {
         imageViewPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ProfileActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+                startActivity(intent);*/
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(v.getContext(), LoginActivity.class));
             }
         });
 
