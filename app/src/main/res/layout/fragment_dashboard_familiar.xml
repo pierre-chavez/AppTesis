@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DashboardFamiliar">
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+
+        <ImageView
+            android:id="@+id/imageViewReporte"
+            android:layout_width="wrap_content"
+            android:layout_height="145dp"
+            android:layout_margin="4dp"
+            android:src="@drawable/monitor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Reportes de caídas de pacientes"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />
+
+        <Button
+            android:id="@+id/buttonReporte"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_marginTop="4dp"
+            android:text="Reporte"
+            android:background="#4CA197"
+            android:textColor="#fff"
+            android:layout_marginBottom="8dp"/>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.constraint.ConstraintLayout>

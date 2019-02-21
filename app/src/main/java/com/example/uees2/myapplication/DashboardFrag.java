@@ -116,6 +116,18 @@ public class DashboardFrag extends Fragment {
                     imageViewUsuarios.setVisibility(View.GONE);
                 }
 
+                if(usuario.getRol().equals("Admin") || usuario.getRol().equals("Enfermero") ){
+
+
+
+                }else{
+
+                    Intent intent = new Intent(getContext(), InicioFamiliar.class);
+                    startActivity(intent);
+                }
+
+
+
             }
 
             @Override
@@ -247,6 +259,9 @@ public class DashboardFrag extends Fragment {
 
         return myFragmentView;
     }
+
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

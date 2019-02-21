@@ -3,14 +3,21 @@ package com.example.uees2.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.onesignal.OSPermissionSubscriptionState;
 import com.onesignal.OSSubscriptionState;
 import com.onesignal.OneSignal;
@@ -23,6 +30,8 @@ public class Dashboard extends AppCompatActivity {
     String playerId = "";
 
     FirebaseAuth mAuth;
+    Usuario usuario;
+    DatabaseReference databaseUsuarios;
 
 
     public static final String TAG = "Version";
@@ -51,10 +60,11 @@ public class Dashboard extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 
-        //dasboard
         DashboardFrag dashboardFrag = new DashboardFrag();
-        fragmentTransaction.replace(R.id.container, dashboardFrag);
+        fragmentTransaction.add(R.id.container, dashboardFrag);
         fragmentTransaction.commit();
+
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -105,5 +115,45 @@ public class Dashboard extends AppCompatActivity {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
+
+
+
+        databaseUsuarios = FirebaseDatabase.getInstance().getReference("Usuario").child(mAuth.getUid());
+
+        databaseUsuarios.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                usuario = dataSnapshot.getValue(Usuario.class);
+               // cambiarDasboard(usuario);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+
+    public void cambiarDasboard(Usuario usuario){
+
+        if(usuario.getRol().equals("Admin") || usuario.getRol().equals("Enfermero") ){
+
+
+
+        }else{
+
+            Intent intent = new Intent(this.getContext(), Familiar.class);
+            startActivity(intent);
+
+        }
+
     }
 }
+
+

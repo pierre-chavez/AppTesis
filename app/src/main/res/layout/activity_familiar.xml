@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Familiar">
+
+
+    <ImageView
+        android:id="@+id/imageViewPerfil"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/perfil2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayoutCompat"
+        tools:ignore="MissingConstraints" />
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/imageViewReporte"
+            android:layout_width="wrap_content"
+            android:layout_height="145dp"
+            android:layout_margin="4dp"
+            android:src="@drawable/monitor" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Reportes de caídas de pacientes"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />
+
+        <Button
+            android:id="@+id/buttonReporte"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:background="#4CA197"
+            android:text="Reporte"
+            android:textColor="#fff" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+
+</android.support.constraint.ConstraintLayout>

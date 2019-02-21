@@ -53,7 +53,9 @@
         <activity android:name=".CaidasGraficoActivity" />
         <activity android:name=".ReportePacientesActivity" />
         <activity android:name=".UserActivity" />
-        <activity android:name=".ListarUsuariosActivity"></activity>
+        <activity android:name=".ListarUsuariosActivity" />
+        <activity android:name=".Familiar" />
+        <activity android:name=".InicioFamiliar"></activity>
     </application>
 
 </manifest>
