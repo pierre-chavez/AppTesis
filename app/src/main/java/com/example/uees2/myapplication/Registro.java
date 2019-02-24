@@ -21,6 +21,7 @@ public class Registro extends AppCompatActivity {
 
     Date fechaRegistro;
     EditText editTextCedula, editTextNombres, editTextApellidos, editTextNombreContato, editTextCelularContacto;
+    EditText editTextHabitacion;
     Spinner spinnerGenero,spinnerHabitacion;
     Button buttonRegistrar;
 
@@ -40,7 +41,8 @@ public class Registro extends AppCompatActivity {
         editTextNombreContato = findViewById(R.id.editTextNombreContacto);
         editTextCelularContacto = findViewById(R.id.editTextCelularContacto);
         spinnerGenero = findViewById(R.id.spinnerGenero);
-        spinnerHabitacion = findViewById(R.id.spinnerHabitacion);
+        //spinnerHabitacion = findViewById(R.id.spinnerHabitacion);
+        editTextHabitacion = findViewById(R.id.editTextHabitacion);
         buttonRegistrar = findViewById(R.id.buttonRegistrar);
 
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +77,9 @@ public class Registro extends AppCompatActivity {
         String nombreContacto = editTextNombreContato.getText().toString();
         String celularContacto = editTextCelularContacto.getText().toString();
         String genero = spinnerGenero.getSelectedItem().toString();
-        String habitacion = spinnerHabitacion.getSelectedItem().toString();
+        //String habitacion = spinnerHabitacion.getSelectedItem().toString();
+        String habitacion = editTextHabitacion.getText().toString().trim();
+
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat mdformat = new SimpleDateFormat("dd/mm/yyyy");
@@ -114,9 +118,9 @@ public class Registro extends AppCompatActivity {
 
 
         String id = cedula;
+        //int nHabitacion = Integer.parseInt(habitacion);
 
-
-        Paciente paciente = new Paciente(cedula, nombres, apellidos, strDate, genero, habitacion, nombreContacto, celularContacto);
+        Paciente paciente = new Paciente(cedula,nombres,apellidos,strDate,genero,habitacion,nombreContacto,celularContacto);
 
         databasePacientes.child(id).setValue(paciente);
         finish();

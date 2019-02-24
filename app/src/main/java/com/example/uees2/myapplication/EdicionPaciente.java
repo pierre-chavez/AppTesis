@@ -19,6 +19,7 @@ public class EdicionPaciente extends AppCompatActivity {
 
     Date fechaRegistro;
     EditText editTextCedula, editTextNombres, editTextApellidos, editTextNombreContato, editTextCelularContacto;
+    EditText editTextHabitacion;
     Spinner spinnerGenero,spinnerHabitacion;
     Button buttonActualizar;
 
@@ -39,7 +40,8 @@ public class EdicionPaciente extends AppCompatActivity {
         editTextNombreContato = findViewById(R.id.editTextNombreContacto);
         editTextCelularContacto = findViewById(R.id.editTextCelularContacto);
         spinnerGenero = findViewById(R.id.spinnerGenero);
-        spinnerHabitacion = findViewById(R.id.spinnerHabitacion);
+        //spinnerHabitacion = findViewById(R.id.spinnerHabitacion);
+        editTextHabitacion = findViewById(R.id.editTextHabitacion);
         buttonActualizar = findViewById(R.id.buttonActualizar);
 
         editTextCedula.setText(paciente.getCedula());
@@ -48,7 +50,8 @@ public class EdicionPaciente extends AppCompatActivity {
         editTextNombreContato.setText(paciente.getNombreContacto());
         editTextCelularContacto.setText(paciente.getNumeroContacto());
         spinnerGenero.setSelection(getIndex(spinnerGenero, paciente.getGenero()));
-        spinnerHabitacion.setSelection(getIndex(spinnerHabitacion, Integer.toString(paciente.getHabitcion())));
+        //spinnerHabitacion.setSelection(getIndex(spinnerHabitacion, Integer.toString(paciente.getHabitcion())));
+        editTextHabitacion.setText(paciente.getHabitcion());
 
 
         buttonActualizar.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +63,7 @@ public class EdicionPaciente extends AppCompatActivity {
                 String nombreContacto = editTextNombreContato.getText().toString();
                 String celularContacto = editTextCelularContacto.getText().toString();
                 String genero = spinnerGenero.getSelectedItem().toString();
-                String habitacion = spinnerHabitacion.getSelectedItem().toString();
+                String habitacion = editTextHabitacion.getText().toString().trim();
                 String fecha = paciente.fechaRegistro;
 
                 if (cedula.isEmpty()){
@@ -93,7 +96,7 @@ public class EdicionPaciente extends AppCompatActivity {
                     return;
                 }
 
-                ActualizarPaciente(cedula, nombres, apellidos, fecha,genero,Integer.parseInt(habitacion),nombreContacto,celularContacto);
+                ActualizarPaciente(cedula, nombres, apellidos, fecha,genero,habitacion,nombreContacto,celularContacto);
 
             }
         });
@@ -112,7 +115,7 @@ public class EdicionPaciente extends AppCompatActivity {
     }
 
 
-    private boolean ActualizarPaciente(String cedula, String nombres,String apellidos, String fechaRegistro,String genero, int habitacion, String nombreContacto, String celular){
+    private boolean ActualizarPaciente(String cedula, String nombres,String apellidos, String fechaRegistro,String genero, String habitacion, String nombreContacto, String celular){
 
 
         String id= cedula;
