@@ -43,7 +43,8 @@
         android:id="@+id/editTextDisplayName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ingresa el nombre del ususario"
+        android:enabled="false"
+        android:hint="Email"
         android:inputType="text"
         android:singleLine="true" />
 
@@ -63,6 +64,7 @@
         android:paddingLeft="55dp"
         android:paddingRight="55dp"
         android:text="Guardar"
+        android:visibility="invisible"
         android:textAllCaps="false" />
 
     <TextView
@@ -72,6 +74,7 @@
         android:padding="15dp"
         android:text="Cerrar Sesión"
         android:textAlignment="center"
+        android:visibility="invisible"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
 
