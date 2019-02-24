@@ -114,9 +114,9 @@ public class Registro extends AppCompatActivity {
 
 
         String id = cedula;
-        int nHabitacion = Integer.parseInt(habitacion);
 
-        Paciente paciente = new Paciente(cedula,nombres,apellidos,strDate,genero,nHabitacion,nombreContacto,celularContacto);
+
+        Paciente paciente = new Paciente(cedula, nombres, apellidos, strDate, genero, habitacion, nombreContacto, celularContacto);
 
         databasePacientes.child(id).setValue(paciente);
         finish();

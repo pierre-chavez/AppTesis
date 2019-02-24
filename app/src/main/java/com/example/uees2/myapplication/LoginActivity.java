@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar progressBar;
     public String playerId = "";
     DatabaseReference databaseUsuario;
-
+    Usuario usuario;
     public LoginActivity() {
     }
 
@@ -122,13 +123,26 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Log.d("PlayerId", playerId);
                     actualizarUsuario(email, playerId);
-                    finish();
-                    Intent intent = new Intent(LoginActivity.this, Dashboard.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    Dashboard.EMAIL = email;
-                    startActivity(intent);
+
+                    if (mAuth.getCurrentUser() != null) {
+                        final FirebaseUser user = mAuth.getCurrentUser();
+
+                        if (user != null) {
+                            if (!user.isEmailVerified()) {
+                                Toast.makeText(LoginActivity.this, "Por favor verifique su cuenta, revise su correo electrónico.", Toast.LENGTH_LONG).show();
+                            } else {
+                                Intent intent = new Intent(LoginActivity.this, Dashboard.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                Dashboard.EMAIL = email;
+                                finish();
+                                startActivity(intent);
+                            }
+                        }
+                    }
+                } else if (task.getException().getMessage().toUpperCase().equals("the password is invalid or the user does not have a password".toUpperCase())) {
+                    Toast.makeText(getApplicationContext(), "La contraseña es inválida o el correo ingresado no está registrado", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Por favor, verifica el correo o la contraseña e intantalo de nuevo.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -139,8 +153,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
 
         if (mAuth.getCurrentUser() != null) {
-            finish();
-            startActivity(new Intent(this, Dashboard.class));
+            final FirebaseUser user = mAuth.getCurrentUser();
+
+            if (user != null) {
+                if (!user.isEmailVerified()) {
+                    //Toast.makeText(LoginActivity.this, "Por favor primero verifique su cuenta, revise su correo electrónico.", Toast.LENGTH_SHORT).show();
+                } else {
+                    finish();
+                    startActivity(new Intent(this, Dashboard.class));
+                }
+            }
         }
     }
 

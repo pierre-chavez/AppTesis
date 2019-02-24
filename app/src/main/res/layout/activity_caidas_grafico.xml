@@ -79,10 +79,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
-            android:text="@string/Nombres" />
+            android:text="Total de caídas: " />
 
         <TextView
-            android:id="@+id/textViewTotalCaidas"
+            android:id="@+id/textViewTotalDeCaidas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
