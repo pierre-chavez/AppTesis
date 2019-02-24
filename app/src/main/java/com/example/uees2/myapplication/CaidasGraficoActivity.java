@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -34,7 +35,7 @@ public class CaidasGraficoActivity extends AppCompatActivity {
 
     DatabaseReference databaseCaidas;
 
-    TextView textViewCedula, textViewNombres, textViewHabitacion;
+    TextView textViewCedula, textViewNombres, textViewHabitacion, textViewCaidas;
     List<Caida> listaCaidas;
     List<Date> listaFechaCaidas;
     List<Integer> listaCantidadCaidas;
@@ -55,6 +56,7 @@ public class CaidasGraficoActivity extends AppCompatActivity {
         textViewCedula = (TextView) findViewById(R.id.textViewCedula);
         textViewNombres = (TextView) findViewById(R.id.textViewNombresCompletos);
         textViewHabitacion = (TextView) findViewById(R.id.textViewHabitacion);
+        textViewCaidas = (TextView) findViewById(R.id.textViewTotalCaidas);
         listaCaidas = new ArrayList<>();
         listaFechaCaidas = new ArrayList<>();
         listaCantidadCaidas = new ArrayList<>();
@@ -115,7 +117,7 @@ public class CaidasGraficoActivity extends AppCompatActivity {
         tipoCaida1.setTitle("De frente");
         tipoCaida2.setTitle("De espalda");
         tipoCaida3.setTitle("De lado");
-
+        textViewCaidas.setText(cantidadCaida);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(5);
@@ -123,8 +125,15 @@ public class CaidasGraficoActivity extends AppCompatActivity {
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(cantidadCaida + 1);
 
+        // use static labels for horizontal and vertical labels
+        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+        staticLabelsFormatter.setHorizontalLabels(new String[]{"Tipos de Caída"});
+        staticLabelsFormatter.setVerticalLabels(new String[]{"Cantidad de caídas"});
+        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+        
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+
 
     }
 
