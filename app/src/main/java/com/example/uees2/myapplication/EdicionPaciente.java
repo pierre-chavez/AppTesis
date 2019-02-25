@@ -95,8 +95,11 @@ public class EdicionPaciente extends AppCompatActivity {
                     editTextCelularContacto.requestFocus();
                     return;
                 }
-
-                ActualizarPaciente(cedula, nombres, apellidos, fecha,genero,habitacion,nombreContacto,celularContacto);
+                String familiarIds = paciente.getFamiliaIds();
+                if (familiarIds.equals("playerIds")) {
+                    familiarIds = "";
+                }
+                ActualizarPaciente(cedula, nombres, apellidos, fecha, genero, habitacion, nombreContacto, celularContacto, familiarIds);
 
             }
         });
@@ -115,11 +118,11 @@ public class EdicionPaciente extends AppCompatActivity {
     }
 
 
-    private boolean ActualizarPaciente(String cedula, String nombres,String apellidos, String fechaRegistro,String genero, String habitacion, String nombreContacto, String celular){
+    private boolean ActualizarPaciente(String cedula, String nombres, String apellidos, String fechaRegistro, String genero, String habitacion, String nombreContacto, String celular, String familiarIds) {
 
 
         String id= cedula;
-        Paciente paciente = new Paciente(cedula, nombres, apellidos, fechaRegistro, genero,habitacion, nombreContacto,celular );
+        Paciente paciente = new Paciente(cedula, nombres, apellidos, fechaRegistro, genero, habitacion, nombreContacto, celular, familiarIds);
 
 
         databasePacientes.child(id).setValue(paciente);

@@ -29,6 +29,7 @@ public class EditarPaciente extends AppCompatActivity {
     public static final String NOMBRES = "pacientenombre";
     public static final String HABITACION = "pacientehabitacion";
     public static final String PACIENTE = "paciente";
+    public static final String FAMILIARIDS = "playerIds";
     DatabaseReference databasePacientes;
 
     ListView listViewPacientes;
@@ -119,8 +120,8 @@ public class EditarPaciente extends AppCompatActivity {
         intent.putExtra(CEDULA, paciente.getCedula());
         intent.putExtra(NOMBRES, paciente.getNombres() + " " + paciente.getApellidos());
         intent.putExtra(HABITACION, "" + paciente.getHabitcion());
-        //
         intent.putExtra(PACIENTE, paciente);
+        intent.putExtra(FAMILIARIDS, paciente);
         startActivity(intent);
     }
 }

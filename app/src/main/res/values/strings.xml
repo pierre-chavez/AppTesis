@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">CaidasGye</string>
     <string name="Habitacion">Habitación: </string>
     <string name="Nombres">Nombres: </string>
     <string name="IdPulsera">Identificador de la pulsera: </string>

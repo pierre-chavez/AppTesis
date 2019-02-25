@@ -13,11 +13,12 @@ public class Paciente implements Serializable {
     String habitcion;
     String nombreContacto;
     String numeroContacto;
+    String familiaIds;
 
     public Paciente() {
     }
 
-    public Paciente(String cedula, String nombres, String apellidos, String fechaRegistro, String genero, String habitcion, String nombreContacto, String numeroContacto) {
+    public Paciente(String cedula, String nombres, String apellidos, String fechaRegistro, String genero, String habitcion, String nombreContacto, String numeroContacto, String familiaIds) {
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -26,6 +27,7 @@ public class Paciente implements Serializable {
         this.habitcion = habitcion;
         this.nombreContacto = nombreContacto;
         this.numeroContacto = numeroContacto;
+        this.familiaIds = familiaIds;
     }
 
     public String getHabitcion() {
@@ -90,5 +92,13 @@ public class Paciente implements Serializable {
 
     public void setNumeroContacto(String numeroContacto) {
         this.numeroContacto = numeroContacto;
+    }
+
+    public String getFamiliaIds() {
+        return familiaIds;
+    }
+
+    public void setFamiliaIds(String familiaIds) {
+        this.familiaIds = familiaIds;
     }
 }
