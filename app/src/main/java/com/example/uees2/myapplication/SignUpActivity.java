@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.onesignal.OneSignal;
@@ -80,7 +81,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(v.getContext(), ProfileActivity.class));
+                startActivity(new Intent(v.getContext(), LoginActivity.class));
             }
         });
     }
@@ -125,19 +126,27 @@ public class SignUpActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
-                    finish();
+
                     String correo = editTextEmail.getText().toString().trim();
                     String contrasenia = editTextPassword.getText().toString().trim();
                     String userId = mAuth.getUid();
                     registrarUsuario(userId,correo, contrasenia, "Familiar", playerId);
-                    startActivity(new Intent(SignUpActivity.this, Dashboard.class));
+                    final FirebaseUser user = mAuth.getCurrentUser();
+                    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(getApplicationContext(), "Verificación de Email enviada. Por favor verificar su correo.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    mAuth = null;
+                    startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                    finish();
                 } else {
-
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         Toast.makeText(getApplicationContext(), "Usuario ya ha sido registrado", Toast.LENGTH_SHORT).show();
 
                     } else {
-                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Por favor, verifica el correo o la contraseña e intantalo de nuevo.", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -151,7 +160,6 @@ public class SignUpActivity extends AppCompatActivity {
         //String id = databaseUsuario.push().getKey();
         String id = userdId;
         databaseUsuario.child(id).setValue(usuario);
-        finish();
     }
 
     public boolean isValidPassword(final String password) {

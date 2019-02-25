@@ -43,6 +43,7 @@ public class CaidasGraficoActivity extends AppCompatActivity {
     GraphView graphCaida;
     GraphView graphFecha;
     private int mNumLabels = 4;
+    int totalCaidas = 0;
     int cantidadCaida = 0;
     int caidaTipo1 = 0;
     int caidaTipo2 = 0;
@@ -56,7 +57,7 @@ public class CaidasGraficoActivity extends AppCompatActivity {
         textViewCedula = (TextView) findViewById(R.id.textViewCedula);
         textViewNombres = (TextView) findViewById(R.id.textViewNombresCompletos);
         textViewHabitacion = (TextView) findViewById(R.id.textViewHabitacion);
-        textViewCaidas = (TextView) findViewById(R.id.textViewTotalCaidas);
+        textViewCaidas = (TextView) findViewById(R.id.textViewTotalDeCaidas);
         listaCaidas = new ArrayList<>();
         listaFechaCaidas = new ArrayList<>();
         listaCantidadCaidas = new ArrayList<>();
@@ -117,7 +118,7 @@ public class CaidasGraficoActivity extends AppCompatActivity {
         tipoCaida1.setTitle("De frente");
         tipoCaida2.setTitle("De espalda");
         tipoCaida3.setTitle("De lado");
-        textViewCaidas.setText(cantidadCaida);
+        textViewCaidas.setText("" + cantidadCaida);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(5);
@@ -218,6 +219,7 @@ public class CaidasGraficoActivity extends AppCompatActivity {
                     }
                     listaCaidas.add(caida);
                 }
+                totalCaidas = caidaTipo1 + caidaTipo2 + caidaTipo3;
                 cantidadCaida = Math.max(caidaTipo1, caidaTipo2);
                 cantidadCaida = Math.max(cantidadCaida, caidaTipo3);
                 HashSet<Date> listToSet = new HashSet<Date>(listaFechaCaidas);
