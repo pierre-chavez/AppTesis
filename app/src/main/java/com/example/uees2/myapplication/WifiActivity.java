@@ -55,7 +55,7 @@ public class WifiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 webView.loadUrl("http://10.0.1.1");
                 Log.d("Recargar", "true");
-                webView.reload();
+                //webView.reload();
             }
         });
     }
