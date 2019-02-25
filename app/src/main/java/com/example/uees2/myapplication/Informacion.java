@@ -20,7 +20,7 @@ public class Informacion extends AppIntro {
                 R.drawable.enfermera, ContextCompat.getColor(getApplicationContext(), R.color.Intro1)));
         addSlide(AppIntroFragment.newInstance("Enlazar", "En esta opción se enlaza una pulsera con un paciente.",
                 R.drawable.pulsera, ContextCompat.getColor(getApplicationContext(), R.color.Intro2)));
-        addSlide(AppIntroFragment.newInstance("Conectar", "En esta opción se configura las credenciales de la red WiFi con acceso a Internet SSID (Nombre de la red WiFi) y su contraseña para que la pulsera se pueda conectar a dicha red.",
+        addSlide(AppIntroFragment.newInstance("Conectar WiFi", "En esta opción se configura las credenciales de la red WiFi con acceso a Internet SSID (Nombre de la red WiFi) y su contraseña para que la pulsera se pueda conectar a dicha red.",
                 R.drawable.wifi, ContextCompat.getColor(getApplicationContext(), R.color.Intro3)));
         addSlide(AppIntroFragment.newInstance("Reporte de caídas", "En esta opción se listan los pacientes y las caidas de cada uno, indicando el tipo de caída y cuando se detecto.",
                 R.drawable.monitor, ContextCompat.getColor(getApplicationContext(), R.color.Intro4)));
