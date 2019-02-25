@@ -72,9 +72,7 @@ public class CaidasGraficoActivity extends AppCompatActivity {
         databaseCaidas = FirebaseDatabase.getInstance().getReference("Caida").child(cedula);
 
         graphCaida = (GraphView) findViewById(R.id.graph);
-        //graphFecha = (GraphView) findViewById(R.id.graphFecha);
         initGraphTipoCaida(graphCaida);
-        //initGraphFecha(graphFecha);
     }
 
     public void initGraphTipoCaida(GraphView graph) {
@@ -126,42 +124,10 @@ public class CaidasGraficoActivity extends AppCompatActivity {
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(cantidadCaida + 1);
 
-        // use static labels for horizontal and vertical labels
-        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
-        staticLabelsFormatter.setHorizontalLabels(new String[]{"Tipos de Caída"});
-        staticLabelsFormatter.setVerticalLabels(new String[]{"Cantidad de caídas"});
-        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
-        
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
 
 
-    }
-
-    public void initGraphFecha(GraphView graph) {
-        graph.removeAllSeries();
-        // generate Dates
-        Calendar calendar = Calendar.getInstance();
-
-        // you can directly pass Date objects to DataPoint-Constructor
-        // this will convert the Date to double via Date#getTime()
-
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(generateData());
-        graph.addSeries(series);
-
-        // set date label formatter
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(graph.getContext()));
-        graph.getGridLabelRenderer().setNumHorizontalLabels(mNumLabels);
-
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(0);
-
-        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
-
-        // as we use dates as labels, the human rounding to nice readable numbers
-        // is not nessecary
-        graph.getGridLabelRenderer().setHumanRounding(false);
     }
 
     private DataPoint[] generateData() {
