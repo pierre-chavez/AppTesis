@@ -29,7 +29,7 @@
 
 
         <ImageView
-            android:id="@+id/imageViewReporte"
+            android:id="@+id/imageViewReporte2"
             android:layout_width="wrap_content"
             android:layout_height="145dp"
             android:layout_margin="4dp"
@@ -45,7 +45,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />
 
         <Button
-            android:id="@+id/buttonReporte"
+            android:id="@+id/buttonReporte2"
             android:layout_width="wrap_content"
             android:layout_height="33dp"
             android:layout_marginTop="4dp"
