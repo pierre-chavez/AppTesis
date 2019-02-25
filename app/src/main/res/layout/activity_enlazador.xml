@@ -68,11 +68,17 @@
 
     <Button
         android:id="@+id/buttonEnlazador"
-        android:layout_marginTop="16dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="#5EBC79"
         android:text="@string/Enlazar"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Title"
         android:textColor="#fff" />
+
+    <Button
+        android:id="@+id/buttonDesenlazador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Desenlazar" />
 </LinearLayout>

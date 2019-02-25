@@ -27,6 +27,8 @@ public class Enlazador extends AppCompatActivity {
     DatabaseReference databasePulseras;
     Spinner spinnerCedula, spinnerIdPulsera;
     Button buttonEnlazador;
+    List<PacientePulsera> listaPulsera;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,9 @@ public class Enlazador extends AppCompatActivity {
         spinnerIdPulsera = findViewById(R.id.spinnerPulseras);
 
         buttonEnlazador = findViewById(R.id.buttonEnlazador);
+
+        listaPulsera = new ArrayList<>();
+
 
 
         buttonEnlazador.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +88,15 @@ public class Enlazador extends AppCompatActivity {
                 // initialize the array
                 final List<String> areas = new ArrayList<String>();
 
+                listaPulsera.clear();
+
                 for (DataSnapshot idPulseraSnapshot : dataSnapshot.getChildren()) {
+
+                    PacientePulsera pulsera = idPulseraSnapshot.getValue(PacientePulsera.class);
+                    listaPulsera.add(pulsera);
+
                     String idPulsera = idPulseraSnapshot.child("idPulsera").getValue(String.class);
+
                     areas.add(idPulsera);
                 }
 
@@ -118,11 +130,33 @@ public class Enlazador extends AppCompatActivity {
         }
         PacientePulsera pacientePulsera = new PacientePulsera(idPulsera, cedula, 0);
 
-        databasePulseras.child(idPulsera).setValue(pacientePulsera);
-        finish();
-        Toast.makeText(this, "Enlace exitoso", Toast.LENGTH_SHORT).show();
+        PacientePulsera pulsera = buscarPulsera(idPulsera);
+
+        if(pulsera != null) {
+            //Toast.makeText(this, "pulsera:"+pulsera.getIdPulsera(), Toast.LENGTH_SHORT).show();
+
+            if(pulsera.getCedula() == null || pulsera.getCedula().equals(null) || pulsera.getCedula().equals("")) {
+
+                databasePulseras.child(idPulsera).setValue(pacientePulsera);
+                finish();
+                Toast.makeText(this, "Enlace exitoso", Toast.LENGTH_SHORT).show();
 
 
+            }else{
+                Toast.makeText(this, "Pulsera ya esta enlazada", Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+    }
+
+    PacientePulsera buscarPulsera(String id){
+        for(PacientePulsera pulsera : listaPulsera) {
+            if(pulsera.getIdPulsera().equals(id)) {
+                return pulsera;
+            }
+        }
+        return null;
     }
 
 }
