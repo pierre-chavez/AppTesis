@@ -128,21 +128,31 @@ public class Enlazador extends AppCompatActivity {
             spinnerIdPulsera.requestFocus();
             return;
         }
-        PacientePulsera pacientePulsera = new PacientePulsera(idPulsera, cedula, 0);
 
+        PacientePulsera pacientePulsera = new PacientePulsera(idPulsera, cedula, 0);
         PacientePulsera pulsera = buscarPulsera(idPulsera);
+        PacientePulsera paciente = buscarPaciente(cedula);
 
         if(pulsera != null) {
             //Toast.makeText(this, "pulsera:"+pulsera.getIdPulsera(), Toast.LENGTH_SHORT).show();
 
             if(pulsera.getCedula() == null || pulsera.getCedula().equals(null) || pulsera.getCedula().equals("")) {
 
-                databasePulseras.child(idPulsera).setValue(pacientePulsera);
-                finish();
-                Toast.makeText(this, "Enlace exitoso", Toast.LENGTH_SHORT).show();
+                if(paciente == null) {
+
+                    databasePulseras.child(idPulsera).setValue(pacientePulsera);
+                    finish();
+                    Toast.makeText(this, "Enlace exitoso", Toast.LENGTH_SHORT).show();
+
+                }else{
+
+                    Toast.makeText(this, "Paciente ya esta enlazado a una pulsera", Toast.LENGTH_SHORT).show();
+
+                }
 
 
             }else{
+
                 Toast.makeText(this, "Pulsera ya esta enlazada", Toast.LENGTH_SHORT).show();
 
             }
@@ -158,5 +168,16 @@ public class Enlazador extends AppCompatActivity {
         }
         return null;
     }
+
+
+    PacientePulsera buscarPaciente(String cedula){
+        for(PacientePulsera pulsera : listaPulsera) {
+            if(pulsera.getCedula().equals(cedula)) {
+                return pulsera;
+            }
+        }
+        return null;
+    }
+
 
 }
