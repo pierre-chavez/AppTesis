@@ -1,11 +1,21 @@
 package com.example.uees2.myapplication;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,10 +73,58 @@ public class WifiActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (validaPrivilegios()) {
+            validaUbicacion();
+            configurarWifi();
+        }else{
+            ActivityCompat.requestPermissions(WifiActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    1);
+            validaUbicacion();
+            if (ActivityCompat.checkSelfPermission(WifiActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(WifiActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(WifiActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION);
+            }else{
+                // Write you code here if permission already given.
+                validaUbicacion();
+                configurarWifi();
+            }
+
+        }
+    }
+    public void validaUbicacion(){
+        boolean gps_enabled = false;
+        boolean network_enabled = false;
+        LocationManager lm = (LocationManager)WifiActivity.this.getSystemService(Context.LOCATION_SERVICE);
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch(Exception ex) {}
+
+        try {
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch(Exception ex) {}
+
+        if(!gps_enabled && !network_enabled) {
+            // notify user
+            new AlertDialog.Builder(WifiActivity.this)
+                    .setMessage(R.string.gps_network_not_enabled)
+                    .setNegativeButton(R.string.Cancel,null)
+                    .setPositiveButton(R.string.open_location_settings, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        }
+                    }).show();
+        }
+    }
+
+    public void configurarWifi(){
         if (wifiManager.getWifiState() == wifiManager.WIFI_STATE_DISABLING ||
                 wifiManager.getWifiState() == wifiManager.WIFI_STATE_DISABLED) {
             enableWifi();
         }
+
         WifiInfo wifiInfo = null;
         if (wifiManager != null)
             wifiInfo = wifiManager.getConnectionInfo();
@@ -83,7 +141,6 @@ public class WifiActivity extends AppCompatActivity {
             //Toast.makeText(getApplicationContext(), "Compruebe que la pulsera este encendida.", Toast.LENGTH_LONG).show();
         }
     }
-
     public void enableWifi() {
         wifiManager.setWifiEnabled(true);
     }
@@ -144,4 +201,20 @@ public class WifiActivity extends AppCompatActivity {
         }
         return ssid;
     }
+    public boolean validaPrivilegios(){
+        // TODO: comprobar version actual de android que estamos corriendo
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            if( getApplicationContext().checkCallingOrSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            {////TODO: método para saber si tiene el permiso
+                //COMPRUEBA POR ULTIMA VEZ EL PERMISO DEL SISTEMA  DESDE EL ACTIVITYCOMPAT QUE EL READ_PHONE_STATE HA SIDO ACEPTADO
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
