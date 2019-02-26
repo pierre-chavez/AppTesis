@@ -1,5 +1,6 @@
 package com.example.uees2.myapplication;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,8 +28,12 @@ public class Enlazador extends AppCompatActivity {
     DatabaseReference databasePacientes;
     DatabaseReference databasePulseras;
     Spinner spinnerCedula, spinnerIdPulsera;
-    Button buttonEnlazador;
+    Button buttonEnlazador, buttonDesenlazador;
     List<PacientePulsera> listaPulsera;
+    FirebaseAuth mAuth;
+    DatabaseReference databaseUsuarios;
+    Usuario usuario;
+
 
 
     @Override
@@ -40,15 +46,29 @@ public class Enlazador extends AppCompatActivity {
         spinnerIdPulsera = findViewById(R.id.spinnerPulseras);
 
         buttonEnlazador = findViewById(R.id.buttonEnlazador);
-
+        buttonDesenlazador = findViewById(R.id.buttonDesenlazador);
         listaPulsera = new ArrayList<>();
+        mAuth = FirebaseAuth.getInstance();
 
+        databaseUsuarios = FirebaseDatabase.getInstance().getReference("Usuario").child(mAuth.getUid());
 
 
         buttonEnlazador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EnlazarPacientePulsera();
+            }
+        });
+
+        buttonDesenlazador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(usuario.getRol().equals("Admin")) {
+                    quitarPaciente();
+                }else{
+                    Toast.makeText(view.getContext(), "Usuario no tiene permitido desenlazar paciente", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
     }
@@ -111,6 +131,22 @@ public class Enlazador extends AppCompatActivity {
 
             }
         });
+
+
+        databaseUsuarios.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                usuario = dataSnapshot.getValue(Usuario.class);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void EnlazarPacientePulsera() {
@@ -159,7 +195,26 @@ public class Enlazador extends AppCompatActivity {
 
         }
     }
+    private  void quitarPaciente(){
 
+        String idPulsera = spinnerIdPulsera.getSelectedItem().toString();
+
+        if (idPulsera.isEmpty()) {
+            spinnerIdPulsera.requestFocus();
+            return;
+        }
+
+        PacientePulsera pulsera = buscarPulsera(idPulsera);
+
+        pulsera.setCedula("");
+
+        databasePulseras.child(idPulsera).setValue(pulsera);
+        Toast.makeText(this, "Paciente Desenlazado", Toast.LENGTH_SHORT).show();
+
+
+
+
+    }
     PacientePulsera buscarPulsera(String id){
         for(PacientePulsera pulsera : listaPulsera) {
             if(pulsera.getIdPulsera().equals(id)) {
