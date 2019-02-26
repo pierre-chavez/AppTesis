@@ -16,6 +16,9 @@
     <string name="Nombre_contacto">Nombre de contacto: </string>
     <string name="Celular_contacto">Nombre de contacto: </string>
     <string name="textview">TextView</string>
+    <string name="gps_network_not_enabled">El GPS no está habilitado, por favor habilitar el GPS.</string>
+    <string name="open_location_settings">Activar GPS</string>
+    <string name="Cancel">Cancelar</string>
 
     <array name="generos">
         <item>Masculino</item>
