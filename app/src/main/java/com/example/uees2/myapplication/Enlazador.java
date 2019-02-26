@@ -139,7 +139,11 @@ public class Enlazador extends AppCompatActivity {
 
                 usuario = dataSnapshot.getValue(Usuario.class);
 
-
+                if(usuario.getRol().equals("Admin")){
+                    buttonDesenlazador.setVisibility(View.VISIBLE);
+                }else{
+                    buttonDesenlazador.setVisibility(View.GONE);
+                }
             }
 
             @Override
