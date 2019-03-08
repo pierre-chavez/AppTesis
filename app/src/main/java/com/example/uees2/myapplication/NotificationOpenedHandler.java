@@ -36,11 +36,7 @@ public class NotificationOpenedHandler implements OneSignal.NotificationOpenedHa
                 intent.setData(Uri.parse("tel:" + numeroContacto));
                 Log.e("intent", "" + intent.toString());
                 Log.e("context", "" + c.toString());
-                if (intent != null) {
-                    // c.startActivity(intent);
-                } else {
-                    Log.e("llamada", "Can't resolve app for ACTION_DIAL Intent.");
-                }
+
             } else if (result.action.actionID.equals("2")) {
                 Context c = Dashboard.getContext();
                 Intent intent = new Intent(c, Dashboard.class);

@@ -24,7 +24,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -99,11 +98,11 @@ public class WifiActivity extends AppCompatActivity {
         LocationManager lm = (LocationManager)WifiActivity.this.getSystemService(Context.LOCATION_SERVICE);
         try {
             gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch(Exception ex) {}
+        } catch(Exception ex) {Log.d("","");}
 
         try {
             network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch(Exception ex) {}
+        } catch(Exception ex) {Log.d("","");}
 
         if(!gps_enabled && !network_enabled) {
             // notify user
@@ -159,18 +158,22 @@ public class WifiActivity extends AppCompatActivity {
         conf.SSID = "\"" + networkSSID + "\""; // Please note the quotes. String
         // should contain ssid in quotes
 
-        if (type.equals("wep")) {
-            // wep
-            conf.wepKeys[0] = "\"" + networkPass + "\"";
-            conf.wepTxKeyIndex = 0;
-            conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
-            conf.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
-        } else if (type.equals("wpa")) {
-            // wpa
-            conf.preSharedKey = "\"" + networkPass + "\"";
-        } else if (type.equals("open")) {
-            // open
-            conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+        switch (type) {
+            case "wep":
+                // wep
+                conf.wepKeys[0] = "\"" + networkPass + "\"";
+                conf.wepTxKeyIndex = 0;
+                conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+                conf.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
+                break;
+            case "wpa":
+                // wpa
+                conf.preSharedKey = "\"" + networkPass + "\"";
+                break;
+            case "open":
+                // open
+                conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+                break;
         }
 
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -208,10 +211,7 @@ public class WifiActivity extends AppCompatActivity {
             if( getApplicationContext().checkCallingOrSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             {////TODO: método para saber si tiene el permiso
                 //COMPRUEBA POR ULTIMA VEZ EL PERMISO DEL SISTEMA  DESDE EL ACTIVITYCOMPAT QUE EL READ_PHONE_STATE HA SIDO ACEPTADO
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-                {
-                    return true;
-                }
+                return ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED;
             }
         }
         return false;

@@ -37,7 +37,8 @@
         android:layout_marginRight="128dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/text111"

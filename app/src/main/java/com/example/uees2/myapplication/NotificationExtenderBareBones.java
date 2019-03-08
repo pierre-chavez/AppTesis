@@ -1,14 +1,10 @@
 package com.example.uees2.myapplication;
 
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.onesignal.OSNotificationDisplayedResult;
-import com.onesignal.OSNotificationPayload;
 import com.onesignal.NotificationExtenderService;
 import com.onesignal.OSNotificationReceivedResult;
-
-import java.math.BigInteger;
 
 public class NotificationExtenderBareBones extends NotificationExtenderService {
     @Override

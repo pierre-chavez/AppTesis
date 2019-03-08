@@ -1,10 +1,9 @@
 package com.example.uees2.myapplication;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -99,7 +98,7 @@ public class Registro extends AppCompatActivity {
 
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat mdformat = new SimpleDateFormat("dd/mm/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat mdformat = new SimpleDateFormat("dd/mm/yyyy");
         String strDate = mdformat.format(calendar.getTime());
 
         if (cedula.isEmpty()){
@@ -158,7 +157,7 @@ public class Registro extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 listaUsuario.clear();
-                final List<String> emails = new ArrayList<String>();
+                final List<String> emails = new ArrayList<>();
 
 
                 for(DataSnapshot usuarioSnapshot : dataSnapshot.getChildren() ){
@@ -170,7 +169,7 @@ public class Registro extends AppCompatActivity {
                 }
 
 
-                ArrayAdapter<String> usuarioAdapter = new ArrayAdapter<String>(Registro.this, android.R.layout.simple_spinner_item, emails);
+                ArrayAdapter<String> usuarioAdapter = new ArrayAdapter<>(Registro.this, android.R.layout.simple_spinner_item, emails);
                 usuarioAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerFamiliar.setAdapter(usuarioAdapter);
 

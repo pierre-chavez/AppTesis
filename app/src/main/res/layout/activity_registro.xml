@@ -44,7 +44,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9"
-            app:srcCompat="@drawable/usuario" />
+            app:srcCompat="@drawable/usuario"
+            android:contentDescription="TODO" />
 
         <EditText
             android:id="@+id/editTextApellidos"
@@ -194,7 +195,8 @@
             android:layout_height="wrap_content"
             android:text="Familiar"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="416dp" />
+            tools:layout_editor_absoluteY="416dp"
+            tools:ignore="MissingConstraints" />
 
         <Spinner
             android:id="@+id/spinnerFamiliar"

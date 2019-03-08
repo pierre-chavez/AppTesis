@@ -160,7 +160,7 @@ public class EdicionPaciente extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 listaUsuario.clear();
-                final List<String> emails = new ArrayList<String>();
+                final List<String> emails = new ArrayList<>();
 
                 for(DataSnapshot usuarioSnapshot : dataSnapshot.getChildren() ){
                     Usuario usuario = usuarioSnapshot.getValue(Usuario.class);
@@ -168,7 +168,7 @@ public class EdicionPaciente extends AppCompatActivity {
                     emails.add(usuario.getEmail());
                 }
 
-                ArrayAdapter<String> usuarioAdapter = new ArrayAdapter<String>(EdicionPaciente.this, android.R.layout.simple_spinner_item, emails);
+                ArrayAdapter<String> usuarioAdapter = new ArrayAdapter<>(EdicionPaciente.this, android.R.layout.simple_spinner_item, emails);
                 usuarioAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerFamiliar.setAdapter(usuarioAdapter);
 

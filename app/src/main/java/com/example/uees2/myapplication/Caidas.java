@@ -17,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
-import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
@@ -43,7 +42,6 @@ public class Caidas extends AppCompatActivity {
 
     GraphView graphCaida;
     GraphView graphFecha;
-    private int mNumLabels = 4;
     int cantidadCaida = 0;
     int caidaTipo1 = 0;
     int caidaTipo2 = 0;
@@ -143,6 +141,7 @@ public class Caidas extends AppCompatActivity {
 
         // set date label formatter
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(graph.getContext()));
+        int mNumLabels = 4;
         graph.getGridLabelRenderer().setNumHorizontalLabels(mNumLabels);
 
         graph.getViewport().setYAxisBoundsManual(true);
@@ -213,8 +212,8 @@ public class Caidas extends AppCompatActivity {
                 }
                 cantidadCaida = Math.max(caidaTipo1, caidaTipo2);
                 cantidadCaida = Math.max(cantidadCaida, caidaTipo3);
-                HashSet<Date> listToSet = new HashSet<Date>(listaFechaCaidas);
-                listaFechaCaidas = new ArrayList<Date>(listToSet);
+                HashSet<Date> listToSet = new HashSet<>(listaFechaCaidas);
+                listaFechaCaidas = new ArrayList<>(listToSet);
 
                 int repe = 0;
                 int k = 0;

@@ -34,7 +34,8 @@
                 android:src="@drawable/enfermera"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="TODO" />
 
             <Button
                 android:id="@+id/buttonRegistrar"
@@ -75,7 +76,8 @@
                 android:layout_marginRight="16dp"
                 android:src="@drawable/informacion"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="TODO" />
 
             <Button
                 android:id="@+id/buttonEditar"
@@ -100,7 +102,8 @@
                 android:layout_marginTop="8dp"
                 android:src="@drawable/perfil2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="TODO" />
 
             <ImageView
                 android:id="@+id/imageViewUsuarios"
@@ -111,7 +114,8 @@
                 android:layout_marginTop="16dp"
                 android:src="@drawable/users"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewPerfil" />
+                app:layout_constraintTop_toBottomOf="@+id/imageViewPerfil"
+                android:contentDescription="TODO" />
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
@@ -144,7 +148,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="145dp"
                 android:layout_margin="4dp"
-                android:src="@drawable/monitor" />
+                android:src="@drawable/monitor"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -201,7 +206,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:src="@drawable/pulsera"
-                android:layout_margin="4dp"/>
+                android:layout_margin="4dp"
+                android:contentDescription="TODO" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -253,7 +259,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:layout_margin="4dp"
-                android:src="@drawable/wifi" />
+                android:src="@drawable/wifi"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,11 +54,6 @@ public class DashboardFrag extends Fragment {
     DatabaseReference databaseUsuarios;
 
 
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
 
     public DashboardFrag() {
@@ -86,8 +82,9 @@ public class DashboardFrag extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // TODO: Rename and change types of parameters
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
         mAuth = FirebaseAuth.getInstance();
@@ -143,7 +140,7 @@ public class DashboardFrag extends Fragment {
                 }
 
                 if(usuario.getRol().equals("Admin") || usuario.getRol().equals("Enfermero") ){
-
+                    Log.d("","");
 
 
                 }else{

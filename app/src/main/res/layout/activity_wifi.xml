@@ -45,6 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.811"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wifiViewWeb" />
+        app:layout_constraintTop_toBottomOf="@+id/wifiViewWeb"
+        android:contentDescription="TODO" />
 
 </android.support.constraint.ConstraintLayout>

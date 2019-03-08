@@ -27,7 +27,8 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="20dp"
             android:background="@drawable/usuario"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:contentDescription="TODO" />
 
         <ProgressBar
             android:id="@+id/progressbar"

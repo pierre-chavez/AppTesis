@@ -235,11 +235,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                     if ((suma % 10 == 0) && (suma % 10 == verificador)) {
                         cedulaCorrecta = true;
-                    } else if ((10 - (suma % 10)) == verificador) {
-                        cedulaCorrecta = true;
-                    } else {
-                        cedulaCorrecta = false;
-                    }
+                    } else cedulaCorrecta = (10 - (suma % 10)) == verificador;
                 } else {
                     cedulaCorrecta = false;
                 }
@@ -253,9 +249,7 @@ public class ProfileActivity extends AppCompatActivity {
             cedulaCorrecta = false;
         }
 
-        if (!cedulaCorrecta) {
-            //System.out.println("La Cédula ingresada es Incorrecta");
-        }
+        //System.out.println("La Cédula ingresada es Incorrecta");
         return cedulaCorrecta;
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -43,7 +44,8 @@
                 android:hint="@string/correo_electr_nico"
                 android:inputType="textEmailAddress"
                 android:paddingBottom="15dp"
-                android:autofillHints="" />
+                android:autofillHints=""
+                tools:targetApi="jelly_bean" />
 
             <EditText
                 android:id="@+id/editTextPassword"
@@ -53,7 +55,8 @@
                 android:hint="@string/contrase_a"
                 android:inputType="textPassword"
                 android:paddingBottom="15dp"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                tools:targetApi="jelly_bean" />
 
             <Button
                 android:id="@+id/buttonSignUp"

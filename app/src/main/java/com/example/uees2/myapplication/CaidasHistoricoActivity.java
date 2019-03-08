@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -95,8 +94,8 @@ public class CaidasHistoricoActivity extends AppCompatActivity {
                     }
                     listaCaidas.add(caida);
                 }
-                HashSet<Date> listToSet = new HashSet<Date>(listaFechaCaidas);
-                listaFechaCaidas = new ArrayList<Date>(listToSet);
+                HashSet<Date> listToSet = new HashSet<>(listaFechaCaidas);
+                listaFechaCaidas = new ArrayList<>(listToSet);
 
                 int repe = 0;
                 int k = 0;

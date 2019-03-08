@@ -58,7 +58,7 @@
         <activity android:name=".UserActivity" />
         <activity android:name=".ListarUsuariosActivity" />
         <activity android:name=".Familiar" />
-        <activity android:name=".InicioFamiliar"></activity>
+        <activity android:name=".InicioFamiliar"/>
     </application>
 
 </manifest>

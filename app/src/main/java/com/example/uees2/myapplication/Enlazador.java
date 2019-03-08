@@ -1,8 +1,6 @@
 package com.example.uees2.myapplication;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,9 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class Enlazador extends AppCompatActivity {
@@ -82,7 +78,7 @@ public class Enlazador extends AppCompatActivity {
                 // Is better to use a List, because you don't know the size
                 // of the iterator returned by dataSnapshot.getChildren() to
                 // initialize the array
-                final List<String> areas = new ArrayList<String>();
+                final List<String> areas = new ArrayList<>();
 
                 for (DataSnapshot cedulaSnapshot : dataSnapshot.getChildren()) {
                     String cedula = cedulaSnapshot.child("cedula").getValue(String.class);
@@ -90,7 +86,7 @@ public class Enlazador extends AppCompatActivity {
                 }
 
                 Spinner cedulaSpinner = (Spinner) findViewById(R.id.spinnerPacientes);
-                ArrayAdapter<String> cedulasAdapter = new ArrayAdapter<String>(Enlazador.this, android.R.layout.simple_spinner_item, areas);
+                ArrayAdapter<String> cedulasAdapter = new ArrayAdapter<>(Enlazador.this, android.R.layout.simple_spinner_item, areas);
                 cedulasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 cedulaSpinner.setAdapter(cedulasAdapter);
             }
@@ -106,7 +102,7 @@ public class Enlazador extends AppCompatActivity {
                 // Is better to use a List, because you don't know the size
                 // of the iterator returned by dataSnapshot.getChildren() to
                 // initialize the array
-                final List<String> areas = new ArrayList<String>();
+                final List<String> areas = new ArrayList<>();
 
                 listaPulsera.clear();
 
@@ -121,7 +117,7 @@ public class Enlazador extends AppCompatActivity {
                 }
 
                 Spinner idPulseraSpinner = (Spinner) findViewById(R.id.spinnerPulseras);
-                ArrayAdapter<String> idPulserasAdapter = new ArrayAdapter<String>(Enlazador.this, android.R.layout.simple_spinner_item, areas);
+                ArrayAdapter<String> idPulserasAdapter = new ArrayAdapter<>(Enlazador.this, android.R.layout.simple_spinner_item, areas);
                 idPulserasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 idPulseraSpinner.setAdapter(idPulserasAdapter);
             }

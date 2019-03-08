@@ -6,8 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,16 +15,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -188,8 +182,8 @@ public class CaidasGraficoActivity extends AppCompatActivity {
                 totalCaidas = caidaTipo1 + caidaTipo2 + caidaTipo3;
                 cantidadCaida = Math.max(caidaTipo1, caidaTipo2);
                 cantidadCaida = Math.max(cantidadCaida, caidaTipo3);
-                HashSet<Date> listToSet = new HashSet<Date>(listaFechaCaidas);
-                listaFechaCaidas = new ArrayList<Date>(listToSet);
+                HashSet<Date> listToSet = new HashSet<>(listaFechaCaidas);
+                listaFechaCaidas = new ArrayList<>(listToSet);
 
                 int repe = 0;
                 int k = 0;
