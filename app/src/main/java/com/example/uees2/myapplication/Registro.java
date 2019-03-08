@@ -1,31 +1,42 @@
 package com.example.uees2.myapplication;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Registro extends AppCompatActivity {
 
     Date fechaRegistro;
     EditText editTextCedula, editTextNombres, editTextApellidos, editTextNombreContato, editTextCelularContacto;
     EditText editTextHabitacion;
-    Spinner spinnerGenero,spinnerHabitacion;
+    Spinner spinnerGenero,spinnerFamiliar;
     Button buttonRegistrar;
+    List<Usuario> listaUsuario;
+
 
     DatabaseReference databasePacientes;
+    DatabaseReference databaseFamiliar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +45,21 @@ public class Registro extends AppCompatActivity {
 
 
         databasePacientes = FirebaseDatabase.getInstance().getReference("Persona");
+        databaseFamiliar = FirebaseDatabase.getInstance().getReference("Usuario");
 
         editTextCedula = findViewById(R.id.editTextCedula);
         editTextNombres = findViewById(R.id.editTextNombre);
         editTextApellidos = findViewById(R.id.editTextApellidos);
-        editTextNombreContato = findViewById(R.id.editTextNombreContacto);
+        //editTextNombreContato = findViewById(R.id.editTextNombreContacto);
         editTextCelularContacto = findViewById(R.id.editTextCelularContacto);
         spinnerGenero = findViewById(R.id.spinnerGenero);
         //spinnerHabitacion = findViewById(R.id.spinnerHabitacion);
+        spinnerFamiliar = findViewById(R.id.spinnerFamiliar);
         editTextHabitacion = findViewById(R.id.editTextHabitacion);
         buttonRegistrar = findViewById(R.id.buttonRegistrar);
+
+        listaUsuario = new ArrayList<>();
+
 
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +90,8 @@ public class Registro extends AppCompatActivity {
         String cedula = editTextCedula.getText().toString().trim();
         String nombres = editTextNombres.getText().toString().trim();
         String apellidos = editTextApellidos.getText().toString().trim();
-        String nombreContacto = editTextNombreContato.getText().toString();
+        //String nombreContacto = editTextNombreContato.getText().toString();
+        String emailContacto = spinnerFamiliar.getSelectedItem().toString();
         String celularContacto = editTextCelularContacto.getText().toString();
         String genero = spinnerGenero.getSelectedItem().toString();
         //String habitacion = spinnerHabitacion.getSelectedItem().toString();
@@ -103,8 +120,8 @@ public class Registro extends AppCompatActivity {
             return;
         }
 
-        if (nombreContacto.isEmpty()){
-            editTextNombreContato.setError("Debe ingresar nombre de persona de contacto");
+        if (emailContacto.isEmpty()){
+            editTextNombreContato.setError("Debe seleccionar correo de contacto");
             editTextNombreContato.requestFocus();
             return;
         }
@@ -116,11 +133,13 @@ public class Registro extends AppCompatActivity {
         }
 
 
+        Usuario familiar = buscarUsuario(emailContacto);
 
         String id = cedula;
         //int nHabitacion = Integer.parseInt(habitacion);
-        String familiarIds = "";
-        Paciente paciente = new Paciente(cedula, nombres, apellidos, strDate, genero, habitacion, nombreContacto, celularContacto, familiarIds);
+        String familiarIds = familiar.getPlayerId();
+        String playerId = "\""+ familiarIds+"\"";
+        Paciente paciente = new Paciente(cedula, nombres, apellidos, strDate, genero, habitacion, emailContacto, celularContacto, playerId);
 
         databasePacientes.child(id).setValue(paciente);
         finish();
@@ -130,4 +149,48 @@ public class Registro extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        databaseFamiliar.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                listaUsuario.clear();
+                final List<String> emails = new ArrayList<String>();
+
+
+                for(DataSnapshot usuarioSnapshot : dataSnapshot.getChildren() ){
+
+                    Usuario usuario = usuarioSnapshot.getValue(Usuario.class);
+                    listaUsuario.add(usuario);
+                    emails.add(usuario.getEmail());
+
+                }
+
+
+                ArrayAdapter<String> usuarioAdapter = new ArrayAdapter<String>(Registro.this, android.R.layout.simple_spinner_item, emails);
+                usuarioAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerFamiliar.setAdapter(usuarioAdapter);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    Usuario buscarUsuario(String email){
+        for(Usuario usuario : listaUsuario) {
+            if(usuario.getEmail().equals(email)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
 }
