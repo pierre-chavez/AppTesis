@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class EdicionPaciente extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class EdicionPaciente extends AppCompatActivity {
     Button buttonActualizar;
 
     DatabaseReference databasePacientes;
+    public static final String REGEX_LETRAS = "^[a-zA-ZáÁéÉíÍóÓúÚñÑüÜ\\s]+$";
 
     List<Usuario> listaUsuario;
 
@@ -90,6 +92,24 @@ public class EdicionPaciente extends AppCompatActivity {
                     return;
                 }
 
+                if (cedula.length() > 10){
+                    editTextCedula.setError("La cedula debe ser de 10 digitos");
+                    editTextCedula.requestFocus();
+                    return;
+                }
+
+                if (cedula.length() < 10){
+                    editTextCedula.setError("La cedula debe ser de 10 digitos");
+                    editTextCedula.requestFocus();
+                    return;
+                }
+
+                if (validarCampo(nombres)){
+                    editTextNombres.setError("no debe contener numeros");
+                    editTextNombres.requestFocus();
+                    return;
+                }
+
                 if (nombres.isEmpty()){
                     editTextNombres.setError("Debe ingresar los nombres");
                     editTextNombres.requestFocus();
@@ -102,17 +122,39 @@ public class EdicionPaciente extends AppCompatActivity {
                     return;
                 }
 
+                if (validarCampo(apellidos)){
+                    editTextApellidos.setError("no debe contener numeros");
+                    editTextApellidos.requestFocus();
+                    return;
+                }
+
                 if (emailContacto.isEmpty()){
                     editTextNombreContato.setError("Debe ingresar nombre de persona de contacto");
                     editTextNombreContato.requestFocus();
                     return;
                 }
 
-                if (celularContacto.isEmpty()){
-                    editTextCelularContacto.setError("Debe ingresar celular de persona de contacto");
-                    editTextCelularContacto.requestFocus();
-                    return;
+                if(!celularContacto.isEmpty()){
+
+                    if (celularContacto.length() > 10 ){
+                        editTextCelularContacto.setError("celular debe ser de 10 digitos");
+                        editTextCelularContacto.requestFocus();
+                        return;
+                    }
+
+                    if (celularContacto.length() < 10 ){
+                        editTextCelularContacto.setError("celular debe ser de 10 digitos");
+                        editTextCelularContacto.requestFocus();
+                        return;
+                    }
+
+                    if(!validarCampo(celularContacto)){
+                        editTextCelularContacto.setError("ceular no debe contener letras");
+                        editTextCelularContacto.requestFocus();
+                        return;
+                    }
                 }
+
 
 
                 Usuario familiar = buscarUsuario(emailContacto);
@@ -192,5 +234,15 @@ public class EdicionPaciente extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    boolean validarCampo(String texto){
+        Pattern patron = Pattern.compile(REGEX_LETRAS);
+
+        if(patron.matcher(texto).matches()){
+            return false;
+        }else{
+            return true;
+        }
     }
 }
